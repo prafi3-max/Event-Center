@@ -1,0 +1,2028 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventCenter | Premium Transport</title>
+
+    <!-- ================================
+     SUPABASE
+================================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <style>
+        /* ================================
+       RESET
+    ================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* ================================
+       BODY
+    ================================= */
+
+        body {
+
+            background:
+                linear-gradient(135deg,
+                    #f8f5ee,
+                    #eef3f8);
+
+            color: #172033;
+
+            min-height: 100vh;
+        }
+
+
+        /* ================================
+       NAVBAR
+    ================================= */
+
+        .navbar {
+
+            background:
+                linear-gradient(135deg,
+                    #071a35,
+                    #0d2d52);
+
+            padding: 18px 7%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            box-shadow:
+                0 5px 25px rgba(4, 20, 40, 0.25);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+        }
+
+
+        /* LOGO */
+
+        .logo {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: #ffffff;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .logo span {
+
+            color: #e8b84a;
+        }
+
+
+        /* NAVIGATION */
+
+        nav a {
+
+            text-decoration: none;
+
+            color: #f7f3e8;
+
+            margin-left: 24px;
+
+            font-weight: bold;
+
+            transition:
+                color 0.25s ease;
+        }
+
+
+        nav a:hover {
+
+            color: #e8b84a;
+        }
+
+
+        /* ================================
+       HERO
+    ================================= */
+
+        .hero {
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+
+                radial-gradient(circle at 15% 20%,
+                    rgba(232, 184, 74, 0.25),
+                    transparent 30%),
+
+                radial-gradient(circle at 85% 80%,
+                    rgba(44, 104, 170, 0.35),
+                    transparent 35%),
+
+                linear-gradient(135deg,
+                    #071a35,
+                    #123f6d,
+                    #0b294c);
+
+            color: white;
+
+            text-align: center;
+
+            padding: 75px 20px;
+
+            border-bottom:
+                4px solid #e8b84a;
+        }
+
+
+        .hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(232, 184, 74, 0.08);
+
+            top: -90px;
+            left: -70px;
+
+            animation:
+                floatCircle 6s ease-in-out infinite;
+        }
+
+
+        .hero::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+
+            right: -100px;
+            bottom: -130px;
+
+            animation:
+                floatCircle 7s ease-in-out infinite reverse;
+        }
+
+
+        @keyframes floatCircle {
+
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-18px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+
+        .hero h1 {
+
+            position: relative;
+
+            z-index: 2;
+
+            font-size: 42px;
+
+            margin-bottom: 16px;
+
+            letter-spacing: 0.5px;
+
+            text-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+
+        .hero p {
+
+            position: relative;
+
+            z-index: 2;
+
+            font-size: 18px;
+
+            max-width: 720px;
+
+            margin: auto;
+
+            line-height: 1.7;
+
+            color: #f7f1df;
+        }
+
+
+        /* ================================
+       MAIN CONTAINER
+    ================================= */
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1150px;
+
+            margin: 55px auto;
+        }
+
+
+        /* ================================
+       SECTION TITLE
+    ================================= */
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+
+        .section-title h2 {
+
+            font-size: 32px;
+
+            color: #102b4d;
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-title h2::after {
+
+            content: "";
+
+            display: block;
+
+            width: 65px;
+
+            height: 4px;
+
+            background:
+                linear-gradient(90deg,
+                    #e8b84a,
+                    #c98b19);
+
+            border-radius: 20px;
+
+            margin: 12px auto 0;
+        }
+
+
+        .section-title p {
+
+            color: #667085;
+
+            font-size: 16px;
+        }
+
+
+        /* ================================
+       TRANSPORT GRID
+    ================================= */
+
+        .transport-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 24px;
+        }
+
+
+        /* ================================
+       TRANSPORT CARD
+    ================================= */
+
+        .transport-card {
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(145deg,
+                    #ffffff,
+                    #f8f4e9);
+
+            padding: 30px 25px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            border:
+                1px solid #e7dcc2;
+
+            box-shadow:
+                0 10px 30px rgba(17, 36, 63, 0.10);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+
+        .transport-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            height: 5px;
+
+            background:
+                linear-gradient(90deg,
+                    #0b294c,
+                    #e8b84a,
+                    #0b294c);
+        }
+
+
+        .transport-card:hover {
+
+            transform:
+                translateY(-8px);
+
+            box-shadow:
+                0 18px 40px rgba(8, 31, 58, 0.18);
+
+            border-color:
+                #d7b45c;
+        }
+
+
+        /* ================================
+       VEHICLE ICON
+    ================================= */
+
+        .transport-icon {
+
+            width: 88px;
+
+            height: 88px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(135deg,
+                    #0a2747,
+                    #1c5485);
+
+            border:
+                3px solid #e8b84a;
+
+            font-size: 46px;
+
+            box-shadow:
+                0 8px 20px rgba(8, 38, 70, 0.22);
+
+            transition:
+                transform 0.3s ease;
+        }
+
+
+        .transport-card:hover .transport-icon {
+
+            transform:
+                scale(1.08) rotate(-3deg);
+        }
+
+
+        /* ================================
+       CARD TITLE
+    ================================= */
+
+        .transport-card h3 {
+
+            color: #102b4d;
+
+            font-size: 21px;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* ================================
+       CARD DESCRIPTION
+    ================================= */
+
+        .transport-card p {
+
+            color: #667085;
+
+            line-height: 1.6;
+
+            margin-bottom: 17px;
+
+            min-height: 52px;
+        }
+
+
+        /* ================================
+       PRICE
+    ================================= */
+
+        .price {
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+            color: #a56a00;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* ================================
+       SELECT BUTTON
+    ================================= */
+
+        .select-btn {
+
+            border: none;
+
+            background:
+                linear-gradient(135deg,
+                    #0a2747,
+                    #174e7d);
+
+            color: white;
+
+            padding:
+                13px 23px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+
+        .select-btn:hover {
+
+            background:
+                linear-gradient(135deg,
+                    #c98b19,
+                    #e8b84a);
+
+            color: #172033;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 18px rgba(181, 130, 30, 0.28);
+        }
+
+
+        /* ================================
+       BOOKING MODAL
+       PART 2 WILL CONTINUE HERE
+    ================================= */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            z-index: 9999;
+
+            inset: 0;
+
+            background:
+                rgba(4, 16, 31, 0.75);
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+            backdrop-filter:
+                blur(6px);
+        }
+
+
+        .modal-content {
+
+            background:
+                linear-gradient(145deg,
+                    #ffffff,
+                    #f9f5ea);
+
+            width: 100%;
+
+            max-width: 520px;
+
+            padding: 32px;
+
+            border-radius: 22px;
+
+            border-top:
+                6px solid #e8b84a;
+
+            box-shadow:
+                0 25px 70px rgba(2, 16, 32, 0.35);
+
+            position: relative;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            animation:
+                modalSlide 0.3s ease;
+        }
+
+
+        @keyframes modalSlide {
+
+            from {
+
+                transform:
+                    translateY(25px);
+
+                opacity: 0;
+            }
+
+            to {
+
+                transform:
+                    translateY(0);
+
+                opacity: 1;
+            }
+        }
+
+
+        .close-btn {
+
+            position: absolute;
+
+            right: 18px;
+
+            top: 14px;
+
+            width: 38px;
+
+            height: 38px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #edf2f7;
+
+            color: #173452;
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+            transition:
+                all 0.25s ease;
+        }
+
+
+        .close-btn:hover {
+
+            background: #b42318;
+
+            color: white;
+
+            transform:
+                rotate(90deg);
+        }
+
+
+        .modal-content h2 {
+
+            text-align: center;
+
+            margin-bottom: 8px;
+
+            color: #102b4d;
+
+            font-size: 28px;
+        }
+
+
+        .selected-vehicle {
+
+            text-align: center;
+
+            margin-bottom: 22px;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            background: #fff4d6;
+
+            border:
+                1px solid #e4c66d;
+
+            color: #8b5a00;
+
+            font-weight: bold;
+        }
+
+
+        /* ================================
+       FORM
+    ================================= */
+
+        .form-group {
+
+            margin-bottom: 16px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+
+            color: #25364d;
+        }
+
+
+        .form-group input,
+        .form-group select {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border:
+                1px solid #ccd5df;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            background: #ffffff;
+
+            color: #172033;
+
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus {
+
+            border-color:
+                #c98b19;
+
+            box-shadow:
+                0 0 0 3px rgba(232, 184, 74, 0.18);
+        }
+
+
+        /* ================================
+       BOOK BUTTON
+    ================================= */
+
+        .book-btn {
+
+            width: 100%;
+
+            border: none;
+
+            background:
+                linear-gradient(135deg,
+                    #0a2747,
+                    #174e7d);
+
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 11px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 8px;
+
+            transition:
+                all 0.25s ease;
+        }
+
+
+        .book-btn:hover {
+
+            background:
+                linear-gradient(135deg,
+                    #c98b19,
+                    #e8b84a);
+
+            color: #172033;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(181, 130, 30, 0.25);
+        }
+
+
+        #formMessage {
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            font-weight: bold;
+
+            line-height: 1.5;
+        }
+
+
+        /* ================================
+       RESPONSIVE
+    ================================= */
+
+        @media (max-width: 900px) {
+
+            .transport-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+
+                flex-direction: column;
+
+                gap: 14px;
+
+                padding:
+                    16px 5%;
+            }
+
+
+            nav {
+
+                display: flex;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 12px;
+            }
+
+
+            nav a {
+
+                margin-left: 0;
+
+                font-size: 14px;
+            }
+
+
+            .hero {
+
+                padding:
+                    60px 18px;
+            }
+
+
+            .hero h1 {
+
+                font-size: 31px;
+            }
+
+
+            .hero p {
+
+                font-size: 16px;
+            }
+
+
+            .transport-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .container {
+
+                width: 92%;
+
+                margin:
+                    40px auto;
+            }
+
+
+            .modal {
+
+                padding: 12px;
+            }
+
+
+            .modal-content {
+
+                padding:
+                    28px 20px;
+            }
+
+        }
+
+
+        /* ================================
+       SMALL MOBILE
+    ================================= */
+
+        @media (max-width: 380px) {
+
+            .hero h1 {
+
+                font-size: 27px;
+            }
+
+
+            .section-title h2 {
+
+                font-size: 27px;
+            }
+
+
+            .transport-card {
+
+                padding:
+                    25px 18px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body><!-- ================================
+     NAVBAR
+================================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            Event<span>Center</span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="event-manager.html">
+                Event Manager
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+     HERO
+================================= -->
+
+    <section class="hero">
+
+        <h1>
+            🚘 Premium Event Transport
+        </h1>
+
+        <p>
+
+            Comfortable buses, luxury cars,
+            family vehicles and guest transport
+            for weddings, parties and special events.
+
+        </p>
+
+    </section>
+
+
+    <!-- ================================
+     TRANSPORT SERVICES
+================================= -->
+
+    <main class="container">
+
+
+        <div class="section-title">
+
+            <h2>
+                Choose Your Transport
+            </h2>
+
+            <p>
+                Select the vehicle that suits
+                your event and guest requirements.
+            </p>
+
+        </div>
+
+
+        <div class="transport-grid">
+
+
+            <!-- WEDDING BUS -->
+
+            <div class="transport-card">
+
+                <div class="transport-icon">
+                    🚌
+                </div>
+
+                <h3>
+                    Wedding Bus
+                </h3>
+
+                <p>
+                    Comfortable bus for
+                    transporting wedding guests.
+                </p>
+
+                <div class="price">
+                    From ₹8,000 / day
+                </div>
+
+                <button class="select-btn" onclick="selectTransport('Wedding Bus')">
+
+                    Select Vehicle
+
+                </button>
+
+            </div>
+
+
+            <!-- LUXURY CAR -->
+
+            <div class="transport-card">
+
+                <div class="transport-icon">
+                    🚗
+                </div>
+
+                <h3>
+                    Luxury Car
+                </h3>
+
+                <p>
+                    Premium cars for weddings,
+                    VIP guests and special occasions.
+                </p>
+
+                <div class="price">
+                    From ₹5,000 / day
+                </div>
+
+                <button class="select-btn" onclick="selectTransport('Luxury Car')">
+
+                    Select Vehicle
+
+                </button>
+
+            </div>
+
+
+            <!-- TEMPO TRAVELLER -->
+
+            <div class="transport-card">
+
+                <div class="transport-icon">
+                    🚐
+                </div>
+
+                <h3>
+                    Tempo Traveller
+                </h3>
+
+                <p>
+                    Ideal for family groups
+                    and medium-sized event groups.
+                </p>
+
+                <div class="price">
+                    From ₹6,000 / day
+                </div>
+
+                <button class="select-btn" onclick="selectTransport('Tempo Traveller')">
+
+                    Select Vehicle
+
+                </button>
+
+            </div>
+
+
+            <!-- EVENT TAXI -->
+
+            <div class="transport-card">
+
+                <div class="transport-icon">
+                    🚕
+                </div>
+
+                <h3>
+                    Event Taxi
+                </h3>
+
+                <p>
+                    Cars and taxis for guest
+                    pickup and drop services.
+                </p>
+
+                <div class="price">
+                    From ₹2,500 / day
+                </div>
+
+                <button class="select-btn" onclick="selectTransport('Event Taxi')">
+
+                    Select Vehicle
+
+                </button>
+
+            </div>
+
+
+            <!-- LARGE GUEST BUS -->
+
+            <div class="transport-card">
+
+                <div class="transport-icon">
+                    🚍
+                </div>
+
+                <h3>
+                    Large Guest Bus
+                </h3>
+
+                <p>
+                    Large-capacity bus for
+                    transporting many event guests.
+                </p>
+
+                <div class="price">
+                    From ₹12,000 / day
+                </div>
+
+                <button class="select-btn" onclick="selectTransport('Large Guest Bus')">
+
+                    Select Vehicle
+
+                </button>
+
+            </div>
+
+
+            <!-- FAMILY CAR -->
+
+            <div class="transport-card">
+
+                <div class="transport-icon">
+                    🚙
+                </div>
+
+                <h3>
+                    Family Car
+                </h3>
+
+                <p>
+                    Comfortable cars for families,
+                    relatives and VIP guests.
+                </p>
+
+                <div class="price">
+                    From ₹3,500 / day
+                </div>
+
+                <button class="select-btn" onclick="selectTransport('Family Car')">
+
+                    Select Vehicle
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </main>
+    <!-- ================================
+         BOOKING POPUP
+    ================================= -->
+    <div id="bookingModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="transportModalTitle">
+
+        <div class="modal-content">
+
+            <button type="button" class="close-btn" onclick="closeBookingModal()" aria-label="Close">
+
+                ×
+
+            </button>
+
+
+            <h2 id="transportModalTitle">
+                🚗 Book Transport
+            </h2>
+
+
+            <div class="selected-vehicle">
+
+                Selected Vehicle:
+
+                <span id="selectedVehicle">
+                    -
+                </span>
+
+            </div>
+
+
+            <!-- ================================
+             BOOKING FORM
+        ================================= -->
+
+            <form id="transportForm">
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        👤 Full Name
+                    </label>
+
+                    <input type="text" id="fullName" placeholder="Enter your full name" autocomplete="name" required>
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        📱 Phone Number
+                    </label>
+
+                    <input type="tel" id="phone" placeholder="Enter your 10-digit phone number" autocomplete="tel"
+                        inputmode="numeric" maxlength="10" required>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        📧 Email
+                    </label>
+
+                    <input type="email" id="email" placeholder="Enter your email" autocomplete="email" required>
+
+                </div>
+
+
+                <!-- EVENT TYPE -->
+
+                <div class="form-group">
+
+                    <label for="eventType">
+                        🎉 Event Type
+                    </label>
+
+                    <select id="eventType" required>
+
+                        <option value="">
+                            Select Event Type
+                        </option>
+
+                        <option value="Wedding">
+                            Wedding
+                        </option>
+
+                        <option value="Birthday">
+                            Birthday
+                        </option>
+
+                        <option value="Party">
+                            Party
+                        </option>
+
+                        <option value="Engagement">
+                            Engagement
+                        </option>
+
+                        <option value="Reception">
+                            Reception
+                        </option>
+
+                        <option value="Corporate Event">
+                            Corporate Event
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- EVENT DATE -->
+
+                <div class="form-group">
+
+                    <label for="eventDate">
+                        📅 Event Date
+                    </label>
+
+                    <input type="date" id="eventDate" required>
+
+                </div>
+
+
+                <!-- GUEST COUNT -->
+
+                <div class="form-group">
+
+                    <label for="guestCount">
+                        👥 Number of Guests
+                    </label>
+
+                    <input type="number" id="guestCount" min="1" max="100000" placeholder="Enter number of guests"
+                        required>
+
+                </div>
+
+
+                <!-- BOOK BUTTON -->
+
+                <button type="submit" class="book-btn" id="transportBookButton">
+
+                    🚗 Book Transport
+
+                </button>
+
+
+                <!-- MESSAGE -->
+
+                <div id="formMessage" aria-live="polite">
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================
+     EXTRA MODAL STYLES
+================================= -->
+
+    <style>
+        .modal.show {
+            display: flex;
+            animation: transportModalFade 0.25s ease;
+        }
+
+
+        @keyframes transportModalFade {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+
+        .book-btn:disabled {
+
+            opacity: 0.65;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        .form-group input::placeholder {
+
+            color: #98a2b3;
+        }
+    </style>
+
+
+    <!-- ================================
+     SUPABASE CONNECTION
+================================= -->
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://mdcyegwahbgyesvetetd.supabase.co";
+
+        const SUPABASE_PUBLISHABLE_KEY =
+            "sb_publishable_em0Exl8pVQ6Fvzj4kcbb7A_wbDxNfKw";
+
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
+            );
+
+
+        /* =================================
+           SELECTED VEHICLE
+        ================================= */
+
+        let selectedTransportVehicle = "";
+
+
+        /* =================================
+           ELEMENTS
+        ================================= */
+
+        const bookingModal =
+            document.getElementById(
+                "bookingModal"
+            );
+
+        const transportForm =
+            document.getElementById(
+                "transportForm"
+            );
+
+        const selectedVehicle =
+            document.getElementById(
+                "selectedVehicle"
+            );
+
+        const formMessage =
+            document.getElementById(
+                "formMessage"
+            );
+
+        const bookButton =
+            document.getElementById(
+                "transportBookButton"
+            );
+
+        const eventDateInput =
+            document.getElementById(
+                "eventDate"
+            );
+
+
+        /* =================================
+           TODAY'S DATE
+        ================================= */
+
+        const today =
+            new Date()
+                .toISOString()
+                .split("T")[0];
+
+
+        eventDateInput.min = today;
+
+
+        /* =================================
+           OPEN BOOKING POPUP
+        ================================= */
+
+        function selectTransport(vehicle) {
+
+            selectedTransportVehicle =
+                vehicle;
+
+
+            selectedVehicle.textContent =
+                vehicle;
+
+
+            formMessage.textContent = "";
+
+
+            transportForm.reset();
+
+
+            eventDateInput.min =
+                today;
+
+
+            bookingModal.classList.add(
+                "show"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+
+            setTimeout(function () {
+
+                document
+                    .getElementById("fullName")
+                    .focus();
+
+            }, 200);
+
+        }
+
+
+        /* =================================
+           CLOSE BOOKING POPUP
+        ================================= */
+
+        function closeBookingModal() {
+
+            bookingModal.classList.remove(
+                "show"
+            );
+
+
+            document.body.style.overflow =
+                "";
+
+
+            formMessage.textContent = "";
+
+        }
+
+
+        /* =================================
+           CLICK OUTSIDE POPUP
+        ================================= */
+
+        bookingModal.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target ===
+                    bookingModal
+                ) {
+
+                    closeBookingModal();
+
+                }
+
+            }
+        );
+
+
+        /* =================================
+           ESCAPE KEY
+        ================================= */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Escape" &&
+                    bookingModal.classList.contains(
+                        "show"
+                    )
+                ) {
+
+                    closeBookingModal();
+
+                }
+
+            }
+        );
+
+
+        /* =================================
+           PHONE NUMBER
+        ================================= */
+
+        document
+            .getElementById("phone")
+            .addEventListener(
+                "input",
+                function () {
+
+                    this.value =
+                        this.value.replace(
+                            /[^0-9]/g,
+                            ""
+                        );
+
+                }
+            );
+
+
+        /* =================================
+           BOOKING FORM
+        ================================= */
+
+        transportForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                /* CHECK VEHICLE */
+
+                if (
+                    !selectedTransportVehicle
+                ) {
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Please select a vehicle.";
+
+                    return;
+
+                }
+
+
+                /* CHECK LOGIN */
+
+                formMessage.style.color =
+                    "#a56a00";
+
+                formMessage.textContent =
+                    "Checking your account...";
+
+
+                let user;
+
+
+                try {
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseClient
+                            .auth
+                            .getUser();
+
+
+                    if (error) {
+
+                        console.error(
+                            "Auth error:",
+                            error
+                        );
+
+                        formMessage.style.color =
+                            "#dc2626";
+
+                        formMessage.textContent =
+                            "Unable to verify login. Please try again.";
+
+                        return;
+
+                    }
+
+
+                    user = data.user;
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Login check error:",
+                        error
+                    );
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Unable to check your login.";
+
+                    return;
+
+                }
+
+
+                /* NOT LOGGED IN */
+
+                if (!user) {
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Please login first.";
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "auth.html";
+
+                        },
+                        1000
+                    );
+
+                    return;
+
+                }
+
+
+                /* =================================
+                   GET FORM VALUES
+                ================================= */
+
+                const name =
+                    document
+                        .getElementById("fullName")
+                        .value
+                        .trim();
+
+
+                const phone =
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim();
+
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+
+                const eventType =
+                    document
+                        .getElementById("eventType")
+                        .value;
+
+
+                const eventDate =
+                    document
+                        .getElementById("eventDate")
+                        .value;
+
+
+                const guestCount =
+                    Number(
+                        document
+                            .getElementById("guestCount")
+                            .value
+                    );
+
+
+                /* =================================
+                   VALIDATE PHONE
+                ================================= */
+
+                if (
+                    phone.length !== 10
+                ) {
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Please enter a valid 10-digit phone number.";
+
+                    return;
+
+                }
+
+
+                /* =================================
+                   VALIDATE GUEST COUNT
+                ================================= */
+
+                if (
+                    !Number.isInteger(
+                        guestCount
+                    ) ||
+                    guestCount < 1
+                ) {
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Please enter a valid guest count.";
+
+                    return;
+
+                }
+
+
+                /* =================================
+                   VALIDATE DATE
+                ================================= */
+
+                if (!eventDate) {
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Please select your event date.";
+
+                    return;
+
+                }
+
+
+                if (eventDate < today) {
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Please select a future event date.";
+
+                    return;
+
+                }
+
+
+                /* =================================
+                   LOADING
+                ================================= */
+
+                bookButton.disabled =
+                    true;
+
+
+                bookButton.textContent =
+                    "Booking... ⏳";
+
+
+                formMessage.style.color =
+                    "#a56a00";
+
+
+                formMessage.textContent =
+                    "Booking your transport service...";
+
+
+                /* =================================
+                   SAVE BOOKING
+                ================================= */
+
+                try {
+
+                    const { error } =
+                        await supabaseClient
+                            .from(
+                                "transport_bookings"
+                            )
+                            .insert([{
+
+                                user_id:
+                                    user.id,
+
+                                vehicle:
+                                    selectedTransportVehicle,
+
+                                name:
+                                    name,
+
+                                phone:
+                                    phone,
+
+                                email:
+                                    email,
+
+                                event_type:
+                                    eventType,
+
+                                event_date:
+                                    eventDate,
+
+                                guest_count:
+                                    guestCount
+
+                            }]);
+
+
+                    /* DATABASE ERROR */
+
+                    if (error) {
+
+                        console.error(
+                            "Transport booking error:",
+                            error
+                        );
+
+
+                        formMessage.style.color =
+                            "#dc2626";
+
+
+                        formMessage.textContent =
+                            "Booking failed ❌ " +
+                            error.message;
+
+
+                        bookButton.disabled =
+                            false;
+
+
+                        bookButton.textContent =
+                            "🚗 Book Transport";
+
+
+                        return;
+
+                    }
+
+
+                    /* =================================
+                       SUCCESS
+                    ================================= */
+
+                    formMessage.style.color =
+                        "#15803d";
+
+
+                    formMessage.textContent =
+                        "Transport booking successful! 🎉";
+
+
+                    bookButton.textContent =
+                        "Booking Confirmed ✓";
+
+
+                    /* CLEAR FORM */
+
+                    transportForm.reset();
+
+
+                    selectedTransportVehicle =
+                        "";
+
+
+                    selectedVehicle.textContent =
+                        "-";
+
+
+                    eventDateInput.min =
+                        today;
+
+
+                    /* CLOSE AFTER SUCCESS */
+
+                    setTimeout(
+                        function () {
+
+                            closeBookingModal();
+
+
+                            bookButton.disabled =
+                                false;
+
+
+                            bookButton.textContent =
+                                "🚗 Book Transport";
+
+                        },
+                        1800
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Unexpected booking error:",
+                        error
+                    );
+
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+
+                    formMessage.textContent =
+                        "Something went wrong. Please try again.";
+
+
+                    bookButton.disabled =
+                        false;
+
+
+                    bookButton.textContent =
+                        "🚗 Book Transport";
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>

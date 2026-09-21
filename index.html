@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Event Center | Plan Your Perfect Event</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #2d1838;
+            background: #fff8fc;
+            line-height: 1.6;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 16px 6%;
+
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid #f0d8e8;
+
+            box-shadow:
+                0 5px 25px rgba(80, 30, 80, 0.08);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 800;
+            color: #7c2d78;
+        }
+
+        .logo span {
+            color: #e05298;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #49364f;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #d12b82;
+        }
+
+        .login-btn {
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+
+            padding: 11px 21px;
+            border-radius: 30px;
+
+            background:
+                linear-gradient(135deg, #7c3aed, #db2777);
+
+            box-shadow:
+                0 8px 20px rgba(124, 58, 237, 0.25);
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 680px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 90px 7%;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 90% 15%,
+                    rgba(244, 114, 182, 0.35),
+                    transparent 28%),
+
+                radial-gradient(circle at 10% 90%,
+                    rgba(139, 92, 246, 0.28),
+                    transparent 32%),
+
+                linear-gradient(135deg,
+                    #fff6fb,
+                    #f2ecff,
+                    #fff8ec);
+        }
+
+        .hero::after {
+            content: "🎉";
+
+            position: absolute;
+            right: 7%;
+            top: 15%;
+
+            font-size: 110px;
+            opacity: 0.12;
+
+            transform: rotate(12deg);
+        }
+
+        .hero-content {
+            max-width: 850px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .small-title {
+            color: #c0267e;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            letter-spacing: 2px;
+        }
+
+        .hero h1 {
+            margin-top: 15px;
+            margin-bottom: 20px;
+
+            font-size: clamp(45px, 7vw, 78px);
+
+            line-height: 1.05;
+            letter-spacing: -2px;
+
+            color: #321943;
+        }
+
+        .hero h1 span {
+            background:
+                linear-gradient(90deg,
+                    #7c3aed,
+                    #db2777,
+                    #f97316);
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero p:not(.small-title) {
+            max-width: 700px;
+
+            color: #68566e;
+            font-size: 19px;
+
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            border: none;
+            cursor: pointer;
+
+            padding: 15px 26px;
+            border-radius: 30px;
+
+            font-size: 15px;
+            font-weight: 800;
+
+            transition: 0.25s;
+        }
+
+        .primary-btn {
+            color: white;
+
+            background:
+                linear-gradient(135deg,
+                    #7c3aed,
+                    #db2777);
+
+            box-shadow:
+                0 12px 25px rgba(124, 58, 237, 0.25);
+        }
+
+        .secondary-btn {
+            color: #7c2d78;
+            background: white;
+
+            border: 2px solid #e7b6d3;
+        }
+
+        .primary-btn:hover,
+        .secondary-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* ================= SERVICES ================= */
+
+        .services {
+            padding: 90px 6%;
+
+            background:
+                linear-gradient(180deg,
+                    #fff9fc,
+                    #f8f3ff);
+        }
+
+        .section-title {
+            color: #c0267e;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            letter-spacing: 2px;
+        }
+
+        .services h2,
+        .how h2 {
+            margin-top: 8px;
+            margin-bottom: 40px;
+
+            font-size: clamp(32px, 5vw, 48px);
+
+            color: #321a42;
+        }
+
+        .service-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 25px;
+        }
+
+        .service-card {
+            padding: 28px;
+
+            background: white;
+
+            border-radius: 22px;
+
+            border: 1px solid #efdbea;
+
+            box-shadow:
+                0 12px 30px rgba(92, 48, 91, 0.09);
+
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 20px 40px rgba(92, 48, 91, 0.17);
+        }
+
+        .service-card>div:first-child {
+            font-size: 45px;
+
+            margin-bottom: 12px;
+
+            width: 75px;
+            height: 75px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(145deg,
+                    #fff0f8,
+                    #f1eaff);
+        }
+
+        .service-card h3 {
+            color: #3c2050;
+
+            font-size: 21px;
+
+            margin-bottom: 7px;
+        }
+
+        .service-card p {
+            color: #75657b;
+
+            font-size: 14px;
+        }
+
+        /* ================= MANAGER ================= */
+
+        .manager {
+            padding: 95px 7%;
+
+            color: white;
+
+            background:
+                radial-gradient(circle at 90% 20%,
+                    rgba(249, 115, 22, 0.28),
+                    transparent 28%),
+
+                linear-gradient(135deg,
+                    #4c1d57,
+                    #6d28d9,
+                    #be185d);
+        }
+
+        .manager-content {
+            max-width: 900px;
+        }
+
+        .manager .section-title {
+            color: #ffd4e9;
+        }
+
+        .manager h2 {
+            margin-top: 10px;
+            margin-bottom: 20px;
+
+            font-size: clamp(38px, 5vw, 60px);
+
+            line-height: 1.08;
+        }
+
+        .manager-content>p:not(.section-title) {
+            max-width: 780px;
+
+            color: #f8eafa;
+            font-size: 17px;
+        }
+
+        .manager-points {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 13px;
+
+            margin-top: 30px;
+        }
+
+        .manager-points div {
+            padding: 14px 17px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255, 255, 255, 0.13);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.18);
+
+            backdrop-filter: blur(5px);
+        }
+
+        /* ================= HOW IT WORKS ================= */
+
+        .how {
+            padding: 90px 6%;
+
+            background: white;
+        }
+
+        .steps {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        .steps>div {
+            padding: 26px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(145deg,
+                    #fff5fb,
+                    #f3efff);
+
+            border: 1px solid #eadcf0;
+
+            box-shadow:
+                0 10px 25px rgba(84, 46, 89, 0.07);
+
+            transition: 0.3s;
+        }
+
+        .steps>div:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 15px 30px rgba(84, 46, 89, 0.12);
+        }
+
+        .steps strong {
+            font-size: 35px;
+            font-weight: 800;
+
+            color: #d9468f;
+        }
+
+        .steps h3 {
+            color: #3d2250;
+
+            margin: 8px 0;
+        }
+
+        .steps p {
+            color: #756579;
+
+            font-size: 14px;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            text-align: center;
+
+            padding: 90px 6%;
+
+            background:
+                linear-gradient(135deg,
+                    #fff0f7,
+                    #f0e9ff,
+                    #fff4e8);
+        }
+
+        .cta h2 {
+            color: #321a42;
+
+            font-size: clamp(33px, 5vw, 53px);
+
+            margin-bottom: 10px;
+        }
+
+        .cta p {
+            color: #6e5b74;
+
+            margin-bottom: 25px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+
+            padding: 45px 6%;
+
+            background: #24132f;
+
+            color: #d9cbe0;
+        }
+
+        footer .logo {
+            margin-bottom: 8px;
+        }
+
+        footer p {
+            margin: 6px 0;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 900px) {
+
+            nav {
+                display: none;
+            }
+
+            .service-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .steps {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 14px 4%;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .hero {
+                min-height: 600px;
+
+                padding: 70px 5%;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .hero p:not(.small-title) {
+                font-size: 16px;
+            }
+
+            .service-grid,
+            .steps,
+            .manager-points {
+                grid-template-columns: 1fr;
+            }
+
+            .login-btn {
+                padding: 9px 15px;
+
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">
+            Event<span>Center</span>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#how">How It Works</a>
+            <a href="#manager">Event Manager</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <a href="auth.html" class="login-btn">
+            Login
+        </a>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <p class="small-title">
+                YOUR EVENT. OUR RESPONSIBILITY.
+            </p>
+
+            <h1>
+                Plan Your Event.
+                <br>
+                <span>We Handle Everything.</span>
+            </h1>
+
+            <p>
+                Weddings, birthdays, parties and celebrations —
+                find all your event services in one place.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="primary-btn" onclick="startPlanning()">
+
+                    Start Planning 🎉
+
+                </button>
+
+                <button class="secondary-btn" onclick="exploreServices()">
+
+                    Explore Services →
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SERVICES ================= -->
+
+    <section class="services" id="services">
+
+        <p class="section-title">
+            OUR SERVICES
+        </p>
+
+        <h2>
+            Everything Your Event Needs
+        </h2>
+
+        <div class="service-grid">
+
+            <div class="service-card">
+
+                <div>🏛️</div>
+
+                <h3>
+                    Event Venues
+                </h3>
+
+                <p>
+                    Find the perfect venue for your celebration.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div>🍽️</div>
+
+                <h3>
+                    Catering
+                </h3>
+
+                <p>
+                    Food, chefs and catering teams for your event.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div>🎧</div>
+
+                <h3>
+                    DJ & Entertainment
+                </h3>
+
+                <p>
+                    Music and entertainment to make your event special.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div>🌸</div>
+
+                <h3>
+                    Decoration
+                </h3>
+
+                <p>
+                    Beautiful decorations designed for your event.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div>📸</div>
+
+                <h3>
+                    Photography
+                </h3>
+
+                <p>
+                    Capture your most important moments.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div>🚌</div>
+
+                <h3>
+                    Transportation
+                </h3>
+
+                <p>
+                    Cars and buses for your guests.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= UNIQUE FEATURE ================= -->
+
+    <section class="manager" id="manager">
+
+        <div class="manager-content">
+
+            <p class="section-title">
+                OUR UNIQUE FEATURE
+            </p>
+
+            <h2>
+                One Event.
+                <br>
+                One Dedicated Manager.
+            </h2>
+
+            <p>
+                From the beginning of your event until the final guest leaves,
+                a dedicated Event Center manager coordinates everything for you.
+            </p>
+
+            <div class="manager-points">
+
+                <div>
+                    ✅ Venue coordination
+                </div>
+
+                <div>
+                    ✅ Catering coordination
+                </div>
+
+                <div>
+                    ✅ Decoration & DJ coordination
+                </div>
+
+                <div>
+                    ✅ Transportation coordination
+                </div>
+
+                <div>
+                    ✅ Problem solving during the event
+                </div>
+
+                <div>
+                    ✅ Complete event supervision
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= HOW IT WORKS ================= -->
+
+    <section class="how" id="how">
+
+        <p class="section-title">
+            SIMPLE PROCESS
+        </p>
+
+        <h2>
+            How Event Center Works
+        </h2>
+
+        <div class="steps">
+
+            <div>
+
+                <strong>
+                    01
+                </strong>
+
+                <h3>
+                    Tell Us Your Event
+                </h3>
+
+                <p>
+                    Choose your event type, date, location and budget.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    02
+                </strong>
+
+                <h3>
+                    Choose Services
+                </h3>
+
+                <p>
+                    Select the services you need for your event.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    03
+                </strong>
+
+                <h3>
+                    Manager Assigned
+                </h3>
+
+                <p>
+                    We assign a dedicated Event Manager to your event.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    04
+                </strong>
+
+                <h3>
+                    Enjoy Your Event
+                </h3>
+
+                <p>
+                    We coordinate everything until your event is complete.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CALL TO ACTION ================= -->
+
+    <section class="cta">
+
+        <h2>
+            Ready to Plan Your Event?
+        </h2>
+
+        <p>
+            Tell us what you need. We'll take care of the rest.
+        </p>
+
+        <button class="primary-btn" onclick="startPlanning()">
+
+            Start Planning Your Event
+
+        </button>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer id="contact">
+
+        <div class="logo">
+            Event<span>Center</span>
+        </div>
+
+        <p>
+            One platform. Complete event planning.
+        </p>
+
+        <p>
+            © 2026 Event Center. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        /* ================= START PLANNING ================= */
+
+        function startPlanning() {
+
+            window.location.href = "auth.html";
+
+        }
+
+
+        /* ================= EXPLORE SERVICES ================= */
+
+        function exploreServices() {
+
+            document.getElementById("services").scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

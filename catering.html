@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventCenter | Catering & Cooking Services</title>
+
+    <meta name="description"
+        content="Book professional catering, chefs and cooking staff for weddings, birthdays, parties and special events with EventCenter.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #fffaf2;
+            color: #3b211c;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 900;
+
+            background: rgba(74, 14, 24, 0.97);
+
+            padding: 16px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 4px 18px rgba(60, 10, 20, 0.22);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff8e7;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #f6c453;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff8e7;
+            font-weight: 600;
+            transition: 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: #f6c453;
+            transition: 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #f6c453;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* HERO */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at top right,
+                    rgba(246, 196, 83, 0.22),
+                    transparent 35%),
+
+                linear-gradient(135deg,
+                    #4a0e18,
+                    #7d1827 50%,
+                    #c56a08);
+
+            color: white;
+            text-align: center;
+
+            padding: 85px 20px 90px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+
+            background: rgba(255, 255, 255, 0.13);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            padding: 8px 18px;
+
+            border-radius: 50px;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            margin-bottom: 18px;
+
+            backdrop-filter: blur(8px);
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: auto;
+
+            font-size: 18px;
+            line-height: 1.7;
+
+            color: #fff4d6;
+        }
+
+        .hero-decoration {
+            position: absolute;
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: 0.08;
+
+            font-size: 60px;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+
+            margin: 55px auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+            color: #5a0f1b;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #795548;
+            font-size: 16px;
+        }
+
+        /* CATERING GRID */
+
+        .catering-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 24px;
+        }
+
+        /* CARDS */
+
+        .catering-card {
+            position: relative;
+
+            background: #fffdf8;
+
+            padding: 30px 25px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            border: 1px solid #f0dfbd;
+
+            box-shadow:
+                0 7px 25px rgba(90, 15, 27, 0.08);
+
+            overflow: hidden;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .catering-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 5px;
+
+            background:
+                linear-gradient(90deg,
+                    #7d1827,
+                    #f59e0b,
+                    #d4a017);
+        }
+
+        .catering-card:hover {
+            transform: translateY(-8px);
+
+            border-color: #e5b84b;
+
+            box-shadow:
+                0 16px 35px rgba(90, 15, 27, 0.15);
+        }
+
+        .catering-icon {
+            width: 80px;
+            height: 80px;
+
+            margin: 5px auto 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #fff4d6;
+
+            border-radius: 50%;
+
+            font-size: 42px;
+
+            box-shadow:
+                0 5px 15px rgba(180, 83, 9, 0.10);
+        }
+
+        .catering-card h3 {
+            color: #5a0f1b;
+
+            font-size: 21px;
+
+            margin-bottom: 10px;
+        }
+
+        .catering-card p {
+            color: #795548;
+
+            line-height: 1.6;
+
+            min-height: 77px;
+
+            margin-bottom: 15px;
+        }
+
+        .price {
+            color: #b45309;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            margin-bottom: 18px;
+        }
+
+        /* BUTTON */
+
+        .select-btn {
+            border: none;
+
+            background:
+                linear-gradient(135deg,
+                    #7d1827,
+                    #b91c1c);
+
+            color: white;
+
+            padding: 13px 23px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            transition: 0.3s ease;
+
+            box-shadow:
+                0 5px 14px rgba(125, 24, 39, 0.22);
+        }
+
+        .select-btn:hover {
+            transform: translateY(-2px);
+
+            background:
+                linear-gradient(135deg,
+                    #651321,
+                    #991b1b);
+
+            box-shadow:
+                0 8px 18px rgba(125, 24, 39, 0.30);
+        }
+
+        .select-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+
+            .catering-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 5%;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px 16px;
+            }
+
+            nav a {
+                margin: 0;
+                font-size: 14px;
+            }
+
+            .hero {
+                padding: 65px 20px 75px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 40px auto;
+            }
+
+            .section-title h2 {
+                font-size: 27px;
+            }
+
+            .catering-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .catering-card p {
+                min-height: auto;
+            }
+
+        }
+
+        @media (max-width: 450px) {
+
+            .logo {
+                font-size: 25px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body><!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            Event<span>Center</span>
+        </div>
+
+        <nav>
+
+            <a href="index.html">Home</a>
+
+            <a href="dashboard.html">Dashboard</a>
+
+            <a href="event-manager.html">
+                Event Manager
+            </a>
+
+            <a href="my-bookings.html">
+                My Bookings
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-decoration">
+            🍛 🍽️ 🥘 🍰 👨‍🍳
+        </div>
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                🍽️ Delicious Food • Professional Service
+            </div>
+
+            <h1>
+                Catering & Cooking Services
+            </h1>
+
+            <p>
+                Delicious food, professional chefs and
+                complete cooking support for weddings,
+                birthdays, parties and every special event.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+
+    <main class="container">
+
+        <div class="section-title">
+
+            <h2>
+                Choose Your Catering Service
+            </h2>
+
+            <p>
+                Select the food service that matches your event.
+            </p>
+
+        </div>
+
+
+        <div class="catering-grid">
+
+
+            <div class="catering-card">
+
+                <div class="catering-icon">
+                    🍛
+                </div>
+
+                <h3>
+                    Traditional Catering
+                </h3>
+
+                <p>
+                    Complete traditional food service
+                    for weddings and family events.
+                </p>
+
+                <div class="price">
+                    From ₹350 / person
+                </div>
+
+                <button class="select-btn" onclick="selectCatering('Traditional Catering')">
+
+                    Select Service
+
+                </button>
+
+            </div>
+
+
+            <div class="catering-card">
+
+                <div class="catering-icon">
+                    🍽️
+                </div>
+
+                <h3>
+                    Premium Catering
+                </h3>
+
+                <p>
+                    Premium menu with multiple dishes,
+                    starters and desserts.
+                </p>
+
+                <div class="price">
+                    From ₹500 / person
+                </div>
+
+                <button class="select-btn" onclick="selectCatering('Premium Catering')">
+
+                    Select Service
+
+                </button>
+
+            </div>
+
+
+            <div class="catering-card">
+
+                <div class="catering-icon">
+                    👨‍🍳
+                </div>
+
+                <h3>
+                    Cooking Staff
+                </h3>
+
+                <p>
+                    Professional chefs and cooking staff
+                    available at your event location.
+                </p>
+
+                <div class="price">
+                    From ₹1,500 / staff
+                </div>
+
+                <button class="select-btn" onclick="selectCatering('Cooking Staff')">
+
+                    Select Service
+
+                </button>
+
+            </div>
+
+
+            <div class="catering-card">
+
+                <div class="catering-icon">
+                    🥗
+                </div>
+
+                <h3>
+                    Vegetarian Menu
+                </h3>
+
+                <p>
+                    Fresh vegetarian dishes prepared
+                    especially for your guests.
+                </p>
+
+                <div class="price">
+                    From ₹300 / person
+                </div>
+
+                <button class="select-btn" onclick="selectCatering('Vegetarian Menu')">
+
+                    Select Service
+
+                </button>
+
+            </div>
+
+
+            <div class="catering-card">
+
+                <div class="catering-icon">
+                    🍗
+                </div>
+
+                <h3>
+                    Non-Veg Menu
+                </h3>
+
+                <p>
+                    Special non-vegetarian menu for
+                    weddings and celebrations.
+                </p>
+
+                <div class="price">
+                    From ₹450 / person
+                </div>
+
+                <button class="select-btn" onclick="selectCatering('Non-Veg Menu')">
+
+                    Select Service
+
+                </button>
+
+            </div>
+
+
+            <div class="catering-card">
+
+                <div class="catering-icon">
+                    🎂
+                </div>
+
+                <h3>
+                    Party & Birthday Food
+                </h3>
+
+                <p>
+                    Snacks, meals, cakes and beverages
+                    for birthday and party events.
+                </p>
+
+                <div class="price">
+                    From ₹250 / person
+                </div>
+
+                <button class="select-btn" onclick="selectCatering('Party & Birthday Food')">
+
+                    Select Service
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+    <!-- ⬇️ PASTE PART 2 DIRECTLY HERE -->
+    <!-- ================================
+         BOOKING MODAL
+    ================================= -->
+    <div id="bookingModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+        <div class="modal-content">
+
+            <button class="close-btn" onclick="closeBookingModal()" aria-label="Close">
+
+                ×
+
+            </button>
+
+            <h2 id="modalTitle" class="modal-title">
+
+                🍽️ Book Catering
+
+            </h2>
+
+            <p class="modal-description">
+
+                Enter your event details below.
+
+            </p>
+
+            <div class="selected-service">
+
+                Selected Service:
+
+                <span id="selectedService">
+                    -
+                </span>
+
+            </div>
+
+
+            <!-- BOOKING FORM -->
+
+            <form id="cateringForm">
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        👤 Full Name
+                    </label>
+
+                    <input type="text" id="fullName" placeholder="Enter your full name" autocomplete="name" required>
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        📱 Phone Number
+                    </label>
+
+                    <input type="tel" id="phone" placeholder="Enter your 10-digit phone number" autocomplete="tel"
+                        inputmode="numeric" maxlength="10" required>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        📧 Email
+                    </label>
+
+                    <input type="email" id="email" placeholder="Enter your email" autocomplete="email" required>
+
+                </div>
+
+
+                <!-- EVENT TYPE -->
+
+                <div class="form-group">
+
+                    <label for="eventType">
+                        🎉 Event Type
+                    </label>
+
+                    <select id="eventType" required>
+
+                        <option value="">
+                            Select Event
+                        </option>
+
+                        <option value="Wedding">
+                            Wedding
+                        </option>
+
+                        <option value="Birthday">
+                            Birthday
+                        </option>
+
+                        <option value="Party">
+                            Party
+                        </option>
+
+                        <option value="Engagement">
+                            Engagement
+                        </option>
+
+                        <option value="Reception">
+                            Reception
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- EVENT DATE -->
+
+                <div class="form-group">
+
+                    <label for="eventDate">
+                        📅 Event Date
+                    </label>
+
+                    <input type="date" id="eventDate" required>
+
+                </div>
+
+
+                <!-- GUEST COUNT -->
+
+                <div class="form-group">
+
+                    <label for="guestCount">
+                        👥 Number of Guests
+                    </label>
+
+                    <input type="number" id="guestCount" placeholder="Enter number of guests" min="1" max="100000"
+                        required>
+
+                </div>
+
+
+                <!-- BOOK BUTTON -->
+
+                <button type="submit" class="booking-btn" id="bookingButton">
+
+                    🚀 Book Catering
+
+                </button>
+
+
+                <!-- MESSAGE -->
+
+                <p id="formMessage" class="form-message" aria-live="polite">
+
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================
+     MODAL STYLES
+================================= -->
+
+    <style>
+        .modal-content {
+            background: #fffdf8;
+            width: 100%;
+            max-width: 540px;
+            max-height: 90vh;
+            overflow-y: auto;
+
+            border-radius: 20px;
+
+            padding: 32px;
+
+            position: relative;
+
+            border-top: 6px solid #d4a017;
+
+            box-shadow:
+                0 25px 70px rgba(30, 5, 10, 0.35);
+
+            animation: modalSlide 0.3s ease;
+        }
+
+        @keyframes modalSlide {
+
+            from {
+                transform: translateY(25px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+        }
+
+        .modal {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 2000;
+
+            background:
+                rgba(35, 8, 13, 0.72);
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+
+            animation: modalFade 0.25s ease;
+        }
+
+        @keyframes modalFade {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+        .close-btn {
+            position: absolute;
+
+            right: 18px;
+            top: 14px;
+
+            width: 38px;
+            height: 38px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #fff0e0;
+
+            color: #6f1421;
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+        .close-btn:hover {
+            background: #7d1827;
+            color: white;
+
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            color: #5a0f1b;
+
+            font-size: 28px;
+
+            margin-bottom: 7px;
+
+            padding-right: 35px;
+        }
+
+        .modal-description {
+            color: #795548;
+
+            margin-bottom: 18px;
+        }
+
+        .selected-service {
+            background: #fff4d6;
+
+            border: 1px solid #e5c76b;
+
+            color: #8f1d2c;
+
+            padding: 13px;
+
+            border-radius: 11px;
+
+            margin-bottom: 22px;
+
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+
+            color: #4a2923;
+        }
+
+        .form-group input,
+        .form-group select {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d8c6a5;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            outline: none;
+
+            background: #fffdf8;
+
+            color: #3b211c;
+
+            transition: 0.25s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+
+            border-color: #b45309;
+
+            box-shadow:
+                0 0 0 3px #fef3c7;
+        }
+
+        .booking-btn {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(135deg,
+                    #7d1827,
+                    #d97706);
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+            transition: 0.3s ease;
+
+            box-shadow:
+                0 6px 18px rgba(125, 24, 39, 0.25);
+        }
+
+        .booking-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 22px rgba(125, 24, 39, 0.30);
+        }
+
+        .booking-btn:disabled {
+            opacity: 0.65;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+        .form-message {
+
+            text-align: center;
+
+            margin-top: 14px;
+
+            font-weight: bold;
+
+            min-height: 22px;
+
+            line-height: 1.4;
+        }
+
+        @media (max-width: 450px) {
+
+            .modal {
+                padding: 12px;
+            }
+
+            .modal-content {
+                padding: 27px 18px;
+            }
+
+        }
+    </style>
+
+
+    <!-- ================================
+     SUPABASE LIBRARY
+================================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <script>
+
+        /* =================================
+           SUPABASE CONNECTION
+        ================================= */
+
+        const SUPABASE_URL =
+            "https://mdcyegwahbgyesvetetd.supabase.co";
+
+        const SUPABASE_PUBLISHABLE_KEY =
+            "sb_publishable_em0Exl8pVQ6Fvzj4kcbb7A_wbDxNfKw";
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
+            );
+
+
+        /* =================================
+           VARIABLES
+        ================================= */
+
+        let selectedCateringService = "";
+
+
+        /* =================================
+           ELEMENTS
+        ================================= */
+
+        const bookingModal =
+            document.getElementById("bookingModal");
+
+        const cateringForm =
+            document.getElementById("cateringForm");
+
+        const selectedService =
+            document.getElementById("selectedService");
+
+        const formMessage =
+            document.getElementById("formMessage");
+
+        const bookingButton =
+            document.getElementById("bookingButton");
+
+        const eventDateInput =
+            document.getElementById("eventDate");
+
+
+        /* =================================
+           TODAY'S DATE
+        ================================= */
+
+        const today =
+            new Date()
+                .toISOString()
+                .split("T")[0];
+
+        eventDateInput.min = today;
+
+
+        /* =================================
+           SELECT CATERING SERVICE
+        ================================= */
+
+        function selectCatering(service) {
+
+            selectedCateringService =
+                service;
+
+            selectedService.textContent =
+                service;
+
+            formMessage.textContent = "";
+
+            cateringForm.reset();
+
+            eventDateInput.min = today;
+
+            bookingModal.classList.add("show");
+
+            document.body.style.overflow =
+                "hidden";
+
+            setTimeout(function () {
+
+                document
+                    .getElementById("fullName")
+                    .focus();
+
+            }, 200);
+
+        }
+
+
+        /* =================================
+           CLOSE BOOKING MODAL
+        ================================= */
+
+        function closeBookingModal() {
+
+            bookingModal.classList.remove(
+                "show"
+            );
+
+            document.body.style.overflow =
+                "";
+
+            formMessage.textContent = "";
+
+        }
+
+
+        /* =================================
+           CLICK OUTSIDE MODAL
+        ================================= */
+
+        bookingModal.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target ===
+                    bookingModal
+                ) {
+
+                    closeBookingModal();
+
+                }
+
+            }
+        );
+
+
+        /* =================================
+           ESCAPE KEY
+        ================================= */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Escape" &&
+                    bookingModal.classList.contains(
+                        "show"
+                    )
+                ) {
+
+                    closeBookingModal();
+
+                }
+
+            }
+        );
+
+
+        /* =================================
+           PHONE INPUT
+        ================================= */
+
+        document
+            .getElementById("phone")
+            .addEventListener(
+                "input",
+                function () {
+
+                    this.value =
+                        this.value.replace(
+                            /[^0-9]/g,
+                            ""
+                        );
+
+                }
+            );
+
+
+        /* =================================
+           BOOKING FORM
+        ================================= */
+
+        cateringForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                /* CHECK SERVICE */
+
+                if (
+                    !selectedCateringService
+                ) {
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Please select a catering service.";
+
+                    return;
+
+                }
+
+
+                /* CHECK LOGIN */
+
+                formMessage.style.color =
+                    "#b45309";
+
+                formMessage.textContent =
+                    "Checking your account...";
+
+
+                const {
+                    data: { user },
+                    error: authError
+                } =
+                    await supabaseClient
+                        .auth
+                        .getUser();
+
+
+                if (authError) {
+
+                    console.error(
+                        authError
+                    );
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Unable to verify login. Please try again.";
+
+                    return;
+
+                }
+
+
+                if (!user) {
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Please login first.";
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "auth.html";
+
+                        },
+                        1000
+                    );
+
+                    return;
+
+                }
+
+
+                /* GET FORM VALUES */
+
+                const name =
+                    document
+                        .getElementById("fullName")
+                        .value
+                        .trim();
+
+                const phone =
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim();
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+                const eventType =
+                    document
+                        .getElementById("eventType")
+                        .value;
+
+                const eventDate =
+                    document
+                        .getElementById("eventDate")
+                        .value;
+
+                const guestCount =
+                    Number(
+                        document
+                            .getElementById("guestCount")
+                            .value
+                    );
+
+
+                /* PHONE VALIDATION */
+
+                if (
+                    phone.length !== 10
+                ) {
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Please enter a valid 10-digit phone number.";
+
+                    return;
+
+                }
+
+
+                /* GUEST VALIDATION */
+
+                if (
+                    !Number.isInteger(
+                        guestCount
+                    ) ||
+                    guestCount < 1
+                ) {
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Please enter a valid guest count.";
+
+                    return;
+
+                }
+
+
+                /* DATE VALIDATION */
+
+                if (!eventDate) {
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Please select your event date.";
+
+                    return;
+
+                }
+
+
+                if (eventDate < today) {
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Please select a future event date.";
+
+                    return;
+
+                }
+
+
+                /* LOADING */
+
+                bookingButton.disabled =
+                    true;
+
+                bookingButton.textContent =
+                    "Booking... ⏳";
+
+                formMessage.style.color =
+                    "#b45309";
+
+                formMessage.textContent =
+                    "Booking your catering service...";
+
+
+                try {
+
+                    /* SAVE TO SUPABASE */
+
+                    const { error } =
+                        await supabaseClient
+                            .from(
+                                "catering_bookings"
+                            )
+                            .insert([{
+
+                                user_id:
+                                    user.id,
+
+                                service:
+                                    selectedCateringService,
+
+                                name:
+                                    name,
+
+                                phone:
+                                    phone,
+
+                                email:
+                                    email,
+
+                                event_type:
+                                    eventType,
+
+                                event_date:
+                                    eventDate,
+
+                                guest_count:
+                                    guestCount
+
+                            }]);
+
+
+                    /* DATABASE ERROR */
+
+                    if (error) {
+
+                        console.error(
+                            "Catering booking error:",
+                            error
+                        );
+
+                        formMessage.style.color =
+                            "#dc2626";
+
+                        formMessage.textContent =
+                            "Booking failed ❌ " +
+                            error.message;
+
+                        bookingButton.disabled =
+                            false;
+
+                        bookingButton.textContent =
+                            "🚀 Book Catering";
+
+                        return;
+
+                    }
+
+
+                    /* SUCCESS */
+
+                    formMessage.style.color =
+                        "#15803d";
+
+                    formMessage.textContent =
+                        "Catering booking successful! 🎉";
+
+
+                    bookingButton.textContent =
+                        "Booking Confirmed ✓";
+
+
+                    /* RESET FORM */
+
+                    cateringForm.reset();
+
+                    selectedCateringService =
+                        "";
+
+                    selectedService.textContent =
+                        "-";
+
+                    eventDateInput.min =
+                        today;
+
+
+                    /* CLOSE MODAL */
+
+                    setTimeout(
+                        function () {
+
+                            closeBookingModal();
+
+                            bookingButton.disabled =
+                                false;
+
+                            bookingButton.textContent =
+                                "🚀 Book Catering";
+
+                        },
+                        1800
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Unexpected error:",
+                        error
+                    );
+
+                    formMessage.style.color =
+                        "#dc2626";
+
+                    formMessage.textContent =
+                        "Something went wrong. Please try again.";
+
+                    bookingButton.disabled =
+                        false;
+
+                    bookingButton.textContent =
+                        "🚀 Book Catering";
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>

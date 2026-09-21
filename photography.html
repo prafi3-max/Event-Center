@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventCenter | Photography & Videography</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            background:
+                radial-gradient(circle at top left,
+                    #fff4d6,
+                    transparent 32%),
+                radial-gradient(circle at top right,
+                    #e7ecff,
+                    transparent 35%),
+                linear-gradient(135deg,
+                    #f8f7f2,
+                    #eef1f8);
+            color: #172033;
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        header {
+            background: rgba(15, 23, 42, 0.97);
+            backdrop-filter: blur(12px);
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow:
+                0 6px 25px rgba(15, 23, 42, 0.18);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(234, 179, 8, 0.25);
+        }
+
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+
+        .logo span {
+            color: #f4c95d;
+        }
+
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: #f8e7b0;
+            font-weight: bold;
+            margin-left: 8px;
+            padding: 9px 14px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+
+        .nav-buttons a:hover {
+            background: rgba(244, 201, 93, 0.14);
+            color: #ffffff;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px 48px;
+            background:
+                linear-gradient(135deg,
+                    rgba(15, 23, 42, 0.96),
+                    rgba(30, 41, 59, 0.96));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: rgba(244, 201, 93, 0.10);
+            top: -120px;
+            left: -80px;
+        }
+
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(96, 165, 250, 0.08);
+            bottom: -160px;
+            right: -100px;
+        }
+
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .hero h1 span {
+            background: linear-gradient(90deg,
+                    #f4c95d,
+                    #ffe9a8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        .hero p {
+            color: #d7dce5;
+            font-size: 17px;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* =========================
+           SERVICES
+        ========================= */
+
+        .services {
+            max-width: 1100px;
+            margin: 55px auto 70px;
+            padding: 0 20px;
+        }
+
+
+        .services h2 {
+            text-align: center;
+            margin-bottom: 38px;
+            font-size: 30px;
+            color: #172033;
+        }
+
+
+        .services h2::after {
+            content: "";
+            display: block;
+            width: 65px;
+            height: 4px;
+            margin: 12px auto 0;
+            border-radius: 10px;
+            background: linear-gradient(90deg,
+                    #d4a72c,
+                    #f4c95d);
+        }
+
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+
+        .service-card {
+            background:
+                linear-gradient(145deg,
+                    #ffffff,
+                    #fffdf7);
+            padding: 30px 22px;
+            border-radius: 22px;
+            text-align: center;
+            box-shadow:
+                0 12px 35px rgba(15, 23, 42, 0.10);
+            border: 1px solid #e7dfc8;
+            border-top: 4px solid #d4a72c;
+            transition: 0.3s ease;
+        }
+
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow:
+                0 18px 42px rgba(15, 23, 42, 0.16);
+            border-top-color: #f4c95d;
+        }
+
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            background:
+                linear-gradient(135deg,
+                    #fff4cc,
+                    #f5f0df);
+            border: 1px solid #ead9a7;
+            box-shadow:
+                0 8px 20px rgba(180, 135, 20, 0.12);
+        }
+
+
+        .service-card h3 {
+            margin-bottom: 11px;
+            color: #172033;
+            font-size: 20px;
+        }
+
+
+        .service-card p {
+            color: #667085;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            min-height: 45px;
+        }
+
+
+        .price {
+            display: inline-block;
+            color: #8a6410;
+            background: #fff4cc;
+            border: 1px solid #ead9a7;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+
+        .book-btn {
+            border: none;
+            background:
+                linear-gradient(135deg,
+                    #172033,
+                    #334155);
+            color: #f9e6a7;
+            padding: 11px 22px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow:
+                0 7px 18px rgba(15, 23, 42, 0.20);
+            transition: 0.3s ease;
+            border: 1px solid rgba(244, 201, 93, 0.25);
+        }
+
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            background:
+                linear-gradient(135deg,
+                    #0f172a,
+                    #1e293b);
+            color: #ffffff;
+            box-shadow:
+                0 10px 24px rgba(15, 23, 42, 0.28);
+        }
+
+
+        /* =========================
+           BOOKING SECTION
+        ========================= */
+
+        .booking-section {
+            max-width: 700px;
+            margin: auto;
+            padding: 0 20px 75px;
+        }
+
+
+        .booking-box {
+            background:
+                linear-gradient(145deg,
+                    #ffffff,
+                    #fffdf8);
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow:
+                0 16px 45px rgba(15, 23, 42, 0.13);
+            border: 1px solid #e5dcc4;
+            border-top: 5px solid #d4a72c;
+        }
+
+
+        .booking-box h2 {
+            text-align: center;
+            margin-bottom: 12px;
+            color: #172033;
+            font-size: 26px;
+        }
+
+
+        .selected-service {
+            text-align: center;
+            color: #8a6410;
+            background: #fff8df;
+            border: 1px solid #ead9a7;
+            font-weight: bold;
+            margin-bottom: 28px;
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #344054;
+        }
+
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d7dce5;
+            background: #fcfcfa;
+            border-radius: 10px;
+            font-size: 15px;
+            color: #172033;
+            outline: none;
+            transition: 0.3s;
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #d4a72c;
+            box-shadow:
+                0 0 0 3px rgba(212, 167, 44, 0.13);
+            background: white;
+        }
+
+
+        .form-group input::placeholder {
+            color: #98a2b3;
+        }
+
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 11px;
+            background:
+                linear-gradient(135deg,
+                    #172033,
+                    #334155);
+            color: #f9e6a7;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow:
+                0 8px 22px rgba(15, 23, 42, 0.22);
+            transition: 0.3s ease;
+            border: 1px solid rgba(212, 167, 44, 0.25);
+        }
+
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            color: white;
+            background:
+                linear-gradient(135deg,
+                    #0f172a,
+                    #1e293b);
+            box-shadow:
+                0 11px 26px rgba(15, 23, 42, 0.28);
+        }
+
+
+        #message {
+            text-align: center;
+            margin-top: 18px;
+            font-weight: bold;
+            padding: 5px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+
+            .nav-buttons a {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            header {
+                padding: 15px 4%;
+            }
+
+
+            .logo {
+                font-size: 23px;
+            }
+
+
+            .nav-buttons {
+                gap: 2px;
+            }
+
+
+            .nav-buttons a {
+                font-size: 12px;
+                margin-left: 2px;
+                padding: 7px 8px;
+            }
+
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .hero {
+                padding: 50px 18px 40px;
+            }
+
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+
+            .hero p {
+                font-size: 15px;
+            }
+
+
+            .booking-box {
+                padding: 25px 20px;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <header>
+
+        <div class="logo">
+            Event<span>Center</span>
+        </div>
+
+
+        <div class="nav-buttons">
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="my-bookings.html">
+                My Bookings
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <h1>
+            📸 Photography & <span>Videography</span>
+        </h1>
+
+
+        <p>
+            Capture every beautiful moment of your special event.
+        </p>
+
+    </section>
+
+
+    <!-- SERVICES -->
+
+    <section class="services">
+
+        <h2>
+            Choose Your Service
+        </h2>
+
+
+        <div class="service-grid">
+
+
+            <!-- 1 -->
+
+            <div class="service-card">
+
+                <div class="icon">
+                    📸
+                </div>
+
+
+                <h3>
+                    Wedding Photography
+                </h3>
+
+
+                <p>
+                    Professional photography for your wedding day.
+                </p>
+
+
+                <div class="price">
+                    ₹20,000 / event
+                </div>
+
+
+                <button class="book-btn" onclick="selectService('Wedding Photography')">
+
+                    Book Now
+
+                </button>
+
+            </div>
+
+
+            <!-- 2 -->
+
+            <div class="service-card">
+
+                <div class="icon">
+                    🎥
+                </div>
+
+
+                <h3>
+                    Wedding Videography
+                </h3>
+
+
+                <p>
+                    Cinematic video coverage of your wedding.
+                </p>
+
+
+                <div class="price">
+                    ₹25,000 / event
+                </div>
+
+
+                <button class="book-btn" onclick="selectService('Wedding Videography')">
+
+                    Book Now
+
+                </button>
+
+            </div>
+
+
+            <!-- 3 -->
+
+            <div class="service-card">
+
+                <div class="icon">
+                    💍
+                </div>
+
+
+                <h3>
+                    Engagement Photography
+                </h3>
+
+
+                <p>
+                    Beautiful photos to capture your engagement memories.
+                </p>
+
+
+                <div class="price">
+                    ₹12,000 / event
+                </div>
+
+
+                <button class="book-btn" onclick="selectService('Engagement Photography')">
+
+                    Book Now
+
+                </button>
+
+            </div>
+
+
+            <!-- 4 -->
+
+            <div class="service-card">
+
+                <div class="icon">
+                    🎂
+                </div>
+
+
+                <h3>
+                    Birthday Photography
+                </h3>
+
+
+                <p>
+                    Capture memorable moments from birthday celebrations.
+                </p>
+
+
+                <div class="price">
+                    ₹8,000 / event
+                </div>
+
+
+                <button class="book-btn" onclick="selectService('Birthday Photography')">
+
+                    Book Now
+
+                </button>
+
+            </div>
+
+
+            <!-- 5 -->
+
+            <div class="service-card">
+
+                <div class="icon">
+                    🎬
+                </div>
+
+
+                <h3>
+                    Photo + Video Combo
+                </h3>
+
+
+                <p>
+                    Complete photography and videography coverage.
+                </p>
+
+
+                <div class="price">
+                    ₹40,000 / event
+                </div>
+
+
+                <button class="book-btn" onclick="selectService('Photo + Video Combo')">
+
+                    Book Now
+
+                </button>
+
+            </div>
+
+
+            <!-- 6 -->
+
+            <div class="service-card">
+
+                <div class="icon">
+                    ✨
+                </div>
+
+
+                <h3>
+                    Premium Event Package
+                </h3>
+
+
+                <p>
+                    Premium photo, video and cinematic event coverage.
+                </p>
+
+
+                <div class="price">
+                    ₹55,000 / event
+                </div>
+
+
+                <button class="book-btn" onclick="selectService('Premium Event Package')">
+
+                    Book Now
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+    <!-- BOOKING FORM -->
+
+    <section class="booking-section">
+
+        <div class="booking-box">
+
+            <h2>
+                📝 Book Photography Service
+            </h2>
+
+
+            <div class="selected-service" id="selectedService">
+
+                Please select a service above.
+
+            </div>
+
+
+            <form id="bookingForm">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+
+                    <input type="text" id="name" placeholder="Enter your full name" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Phone Number
+                    </label>
+
+
+                    <input type="tel" id="phone" placeholder="Enter phone number" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+
+                    <input type="email" id="email" placeholder="Enter email" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Event Type
+                    </label>
+
+
+                    <select id="eventType" required>
+
+                        <option value="">
+                            Select event type
+                        </option>
+
+                        <option>
+                            Wedding
+                        </option>
+
+                        <option>
+                            Engagement
+                        </option>
+
+                        <option>
+                            Reception
+                        </option>
+
+                        <option>
+                            Birthday
+                        </option>
+
+                        <option>
+                            Party
+                        </option>
+
+                        <option>
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Event Date
+                    </label>
+
+
+                    <input type="date" id="eventDate" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Number of People
+                    </label>
+
+
+                    <input type="number" id="guestCount" min="1" placeholder="Enter number of people" required>
+
+                </div>
+
+
+                <button type="submit" class="submit-btn">
+
+                    Confirm Photography Booking 📸
+
+                </button>
+
+            </form>
+
+
+            <div id="message"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://mdcyegwahbgyesvetetd.supabase.co";
+
+
+        const SUPABASE_PUBLISHABLE_KEY =
+            "sb_publishable_em0Exl8pVQ6Fvzj4kcbb7A_wbDxNfKw";
+
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
+            );
+
+
+        let selectedService = "";
+
+
+        // =========================
+        // SELECT SERVICE
+        // =========================
+
+        function selectService(service) {
+
+            selectedService = service;
+
+
+            document
+                .getElementById("selectedService")
+                .textContent =
+                "Selected Service: " + service;
+
+
+            document
+                .querySelector(".booking-section")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        // =========================
+        // BOOKING
+        // =========================
+
+        document
+            .getElementById("bookingForm")
+            .addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
+
+
+                    const message =
+                        document.getElementById(
+                            "message"
+                        );
+
+
+                    // CHECK SERVICE
+
+                    if (!selectedService) {
+
+                        message.style.color =
+                            "#dc2626";
+
+                        message.textContent =
+                            "Please select a photography service first.";
+
+                        return;
+
+                    }
+
+
+                    // CHECK LOGIN
+
+                    const {
+                        data: { user }
+                    } =
+                        await supabaseClient
+                            .auth
+                            .getUser();
+
+
+                    if (!user) {
+
+                        alert(
+                            "Please login first."
+                        );
+
+
+                        window.location.href =
+                            "auth.html";
+
+
+                        return;
+
+                    }
+
+
+                    message.style.color =
+                        "#b88916";
+
+                    message.textContent =
+                        "Booking... ⏳";
+
+
+                    // BOOKING DATA
+
+                    const booking = {
+
+                        user_id:
+                            user.id,
+
+                        service:
+                            selectedService,
+
+                        name:
+                            document
+                                .getElementById(
+                                    "name"
+                                )
+                                .value
+                                .trim(),
+
+                        phone:
+                            document
+                                .getElementById(
+                                    "phone"
+                                )
+                                .value
+                                .trim(),
+
+                        email:
+                            document
+                                .getElementById(
+                                    "email"
+                                )
+                                .value
+                                .trim(),
+
+                        event_type:
+                            document
+                                .getElementById(
+                                    "eventType"
+                                )
+                                .value,
+
+                        event_date:
+                            document
+                                .getElementById(
+                                    "eventDate"
+                                )
+                                .value,
+
+                        guest_count:
+                            Number(
+                                document
+                                    .getElementById(
+                                        "guestCount"
+                                    )
+                                    .value
+                            )
+
+                    };
+
+
+                    // INSERT INTO SUPABASE
+
+                    const { error } =
+                        await supabaseClient
+                            .from(
+                                "photography_bookings"
+                            )
+                            .insert([booking]);
+
+
+                    // ERROR
+
+                    if (error) {
+
+                        console.error(
+                            "PHOTOGRAPHY BOOKING ERROR:",
+                            error
+                        );
+
+
+                        message.style.color =
+                            "#dc2626";
+
+
+                        message.textContent =
+                            "Booking failed: " +
+                            error.message;
+
+
+                        return;
+
+                    }
+
+
+                    // SUCCESS
+
+                    message.style.color =
+                        "#15803d";
+
+
+                    message.textContent =
+                        "Photography booking successful! 🎉";
+
+
+                    // RESET FORM
+
+                    document
+                        .getElementById(
+                            "bookingForm"
+                        )
+                        .reset();
+
+
+                    selectedService = "";
+
+
+                    document
+                        .getElementById(
+                            "selectedService"
+                        )
+                        .textContent =
+                        "Please select a service above.";
+
+                }
+            );
+
+    </script>
+
+</body>
+
+</html>

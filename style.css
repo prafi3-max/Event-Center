@@ -1,0 +1,305 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #222;
+    background: #fff;
+    line-height: 1.6;
+}
+
+
+/* Navigation */
+
+header {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+    border-bottom: 1px solid #eee;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #8b3dff;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+}
+
+nav a:hover {
+    color: #8b3dff;
+}
+
+.login-btn {
+    border: none;
+    background: #8b3dff;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+/* Hero */
+
+.hero {
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    padding: 80px 8%;
+    background: linear-gradient(120deg, #faf7ff, #f5f0ff);
+}
+
+.hero-content {
+    max-width: 750px;
+}
+
+.small-title,
+.section-title {
+    color: #8b3dff;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 13px;
+}
+
+.hero h1 {
+    font-size: 58px;
+    line-height: 1.1;
+    margin: 20px 0;
+}
+
+.hero h1 span {
+    color: #8b3dff;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #666;
+    max-width: 600px;
+}
+
+.hero-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.primary-btn,
+.secondary-btn {
+    padding: 14px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.primary-btn {
+    border: none;
+    background: #8b3dff;
+    color: white;
+}
+
+.secondary-btn {
+    background: white;
+    border: 1px solid #8b3dff;
+    color: #8b3dff;
+}
+
+
+/* Services */
+
+.services {
+    padding: 90px 8%;
+    text-align: center;
+}
+
+.services h2,
+.how h2 {
+    font-size: 40px;
+    margin: 10px 0 45px;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.service-card {
+    padding: 35px 25px;
+    border: 1px solid #eee;
+    border-radius: 15px;
+    background: white;
+    transition: 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.service-card div {
+    font-size: 40px;
+}
+
+.service-card h3 {
+    margin: 15px 0 8px;
+}
+
+.service-card p {
+    color: #666;
+}
+
+
+/* Event Manager */
+
+.manager {
+    padding: 100px 8%;
+    background: #17121f;
+    color: white;
+}
+
+.manager-content {
+    max-width: 800px;
+}
+
+.manager h2 {
+    font-size: 48px;
+    line-height: 1.15;
+    margin: 15px 0 25px;
+}
+
+.manager-content>p {
+    color: #ccc;
+    font-size: 18px;
+}
+
+.manager-points {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+
+/* How It Works */
+
+.how {
+    padding: 100px 8%;
+    text-align: center;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.steps div {
+    padding: 25px;
+}
+
+.steps strong {
+    font-size: 30px;
+    color: #8b3dff;
+}
+
+.steps h3 {
+    margin: 12px 0;
+}
+
+.steps p {
+    color: #666;
+}
+
+
+/* CTA */
+
+.cta {
+    text-align: center;
+    padding: 90px 20px;
+    background: #f6f1ff;
+}
+
+.cta h2 {
+    font-size: 40px;
+}
+
+.cta p {
+    margin: 10px 0 25px;
+    color: #666;
+}
+
+
+/* Footer */
+
+footer {
+    text-align: center;
+    padding: 45px 20px;
+    background: #111;
+    color: white;
+}
+
+footer p {
+    margin-top: 10px;
+    color: #aaa;
+}
+
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+    header {
+        padding: 0 4%;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+    .manager h2 {
+        font-size: 38px;
+    }
+
+    .manager-points {
+        grid-template-columns: 1fr;
+    }
+}

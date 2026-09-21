@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventCenter | My Bookings</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background:
+                linear-gradient(135deg,
+                    #fff8fc,
+                    #f4efff,
+                    #fff4f8);
+
+            color: #2d1838;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: rgba(255, 255, 255, 0.96);
+
+            padding: 18px 6%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            border-bottom: 1px solid #efdbea;
+
+            box-shadow:
+                0 5px 25px rgba(80, 30, 80, 0.10);
+
+            backdrop-filter: blur(12px);
+        }
+
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+
+            color: #7c2d78;
+        }
+
+
+        .logo span {
+            color: #e05298;
+        }
+
+
+        nav a {
+            text-decoration: none;
+
+            color: #49364f;
+
+            margin-left: 20px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+
+        nav a:hover {
+            color: #c0267e;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            text-align: center;
+
+            padding: 65px 20px 35px;
+
+            background:
+
+                radial-gradient(circle at 20% 30%,
+                    rgba(216, 180, 254, 0.35),
+                    transparent 30%),
+
+                radial-gradient(circle at 80% 20%,
+                    rgba(244, 114, 182, 0.30),
+                    transparent 30%);
+        }
+
+
+        .hero h1 {
+            font-size: 42px;
+
+            margin-bottom: 12px;
+
+            color: #321943;
+        }
+
+
+        .hero p {
+            color: #68566e;
+
+            font-size: 18px;
+        }
+
+
+        /* ================= ACTION ================= */
+
+        .actions {
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+
+        .refresh-btn {
+            border: none;
+
+            background:
+                linear-gradient(135deg,
+                    #7c3aed,
+                    #db2777);
+
+            color: white;
+
+            padding: 13px 27px;
+
+            border-radius: 30px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 25px rgba(124, 58, 237, 0.25);
+
+            transition: 0.25s;
+        }
+
+
+        .refresh-btn:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 15px 30px rgba(124, 58, 237, 0.35);
+        }
+
+
+        /* ================= BOOKINGS ================= */
+
+        .bookings-container {
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding-bottom: 60px;
+        }
+
+
+        .booking-card {
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 27px;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 10px 30px rgba(92, 48, 91, 0.10);
+
+            border-left:
+                6px solid #8b5cf6;
+
+            transition: 0.3s;
+        }
+
+
+        .booking-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 18px 38px rgba(92, 48, 91, 0.16);
+        }
+
+
+        .booking-card h2 {
+            color: #7c2d78;
+
+            margin-bottom: 18px;
+
+            font-size: 23px;
+        }
+
+
+        .booking-card p {
+            margin: 10px 0;
+
+            color: #68566e;
+
+            line-height: 1.5;
+        }
+
+
+        .booking-card strong {
+            color: #321943;
+        }
+
+
+        /* ================= STATUS ================= */
+
+        .status {
+            display: inline-block;
+
+            margin-top: 12px;
+
+            padding: 8px 17px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+        }
+
+
+        .status-pending {
+            background: #fef3c7;
+
+            color: #92400e;
+        }
+
+
+        .status-accepted {
+            background: #ede9fe;
+
+            color: #6d28d9;
+        }
+
+
+        .status-in-progress {
+            background: #fce7f3;
+
+            color: #be185d;
+        }
+
+
+        .status-completed {
+            background: #dcfce7;
+
+            color: #15803d;
+        }
+
+
+        /* ================= ROOM DATES ================= */
+
+        .room-dates {
+            background:
+                linear-gradient(135deg,
+                    #fff5fb,
+                    #f3efff);
+
+            padding: 14px 17px;
+
+            border-radius: 12px;
+
+            margin-top: 12px;
+
+            border: 1px solid #eadcf0;
+        }
+
+
+        .room-dates p {
+            margin: 5px 0;
+        }
+
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            background: white;
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 30px rgba(92, 48, 91, 0.10);
+
+            border: 1px solid #efdbea;
+        }
+
+
+        .empty h2 {
+            margin-bottom: 12px;
+
+            color: #7c2d78;
+        }
+
+
+        .empty p {
+            color: #75657b;
+        }
+
+
+        /* ================= ERROR ================= */
+
+        .error-box {
+            background: #fee2e2;
+
+            color: #991b1b;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            text-align: center;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background:
+                linear-gradient(135deg,
+                    #24132f,
+                    #4c1d57,
+                    #6d28d9);
+
+            color: #f3e8ff;
+
+            text-align: center;
+
+            padding: 30px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px 20px;
+            }
+
+
+            .logo {
+                font-size: 23px;
+            }
+
+
+            nav a {
+                margin-left: 8px;
+
+                font-size: 14px;
+            }
+
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+
+            .hero p {
+                font-size: 16px;
+            }
+
+
+            .booking-card {
+                padding: 20px;
+            }
+
+
+            .refresh-btn {
+                padding: 12px 22px;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">
+            Event<span>Center</span>
+        </div>
+
+
+        <nav>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="index.html">
+                Home
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <h1>
+            📋 My Bookings
+        </h1>
+
+        <p>
+            All your EventCenter bookings in one place.
+        </p>
+
+    </section>
+
+
+    <!-- ================= REFRESH ================= -->
+
+    <div class="actions">
+
+        <button class="refresh-btn" onclick="loadBookings()">
+
+            🔄 Refresh Bookings
+
+        </button>
+
+    </div>
+
+
+    <!-- ================= BOOKINGS ================= -->
+
+    <section class="bookings-container">
+
+        <div id="bookingsList">
+
+            <div class="empty">
+
+                <h2>
+                    Loading your bookings... ⏳
+                </h2>
+
+                <p>
+                    Please wait.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 EventCenter.
+            Your Event. Our Responsibility. ❤️
+        </p>
+
+    </footer>
+
+
+    <!-- ================= SUPABASE ================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://mdcyegwahbgyesvetetd.supabase.co";
+
+
+        const SUPABASE_ANON_KEY =
+            "sb_publishable_em0Exl8pVQ6Fvzj4kcbb7A_wbDxNfKw";
+
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_ANON_KEY
+            );
+
+
+        // STATUS
+
+        function getStatusClass(status) {
+
+            const value =
+                String(status || "Pending")
+                    .toLowerCase()
+                    .trim();
+
+
+            if (value === "pending")
+                return "status-pending";
+
+
+            if (value === "accepted")
+                return "status-accepted";
+
+
+            if (
+                value === "in progress" ||
+                value === "in-progress"
+            )
+                return "status-in-progress";
+
+
+            if (value === "completed")
+                return "status-completed";
+
+
+            return "";
+
+        }
+
+
+        // ADD BOOKING
+
+        function addBooking(data, service, item) {
+
+            data.forEach(booking => {
+
+                allBookings.push({
+
+                    service: service,
+
+                    item: item(booking),
+
+                    name: booking.name,
+
+                    phone: booking.phone,
+
+                    email: booking.email,
+
+                    eventType: booking.event_type,
+
+                    date: booking.event_date,
+
+                    guests: booking.guest_count,
+
+                    status:
+                        booking.status ||
+                        "Pending",
+
+                    checkIn:
+                        booking.check_in,
+
+                    checkOut:
+                        booking.check_out
+
+                });
+
+            });
+
+        }
+
+
+        // MAIN
+
+        let allBookings = [];
+
+
+        async function loadBookings() {
+
+            const list =
+                document.getElementById(
+                    "bookingsList"
+                );
+
+
+            list.innerHTML = `
+
+                <div class="empty">
+
+                    <h2>
+                        Loading bookings... ⏳
+                    </h2>
+
+                    <p>
+                        Please wait.
+                    </p>
+
+                </div>
+
+            `;
+
+
+            const {
+                data: { user },
+                error
+            } =
+                await supabaseClient.auth.getUser();
+
+
+            if (error || !user) {
+
+                alert("Please login first.");
+
+                window.location.href =
+                    "auth.html";
+
+                return;
+
+            }
+
+
+            allBookings = [];
+
+
+            // VENUE
+
+            let result =
+                await supabaseClient
+                    .from("venue_bookings")
+                    .select("*")
+                    .eq("user_id", user.id);
+
+
+            if (result.data)
+                addBooking(
+                    result.data,
+                    "🏛️ Venue",
+                    b => b.venue_name
+                );
+
+
+            // CATERING
+
+            result =
+                await supabaseClient
+                    .from("catering_bookings")
+                    .select("*")
+                    .eq("user_id", user.id);
+
+
+            if (result.data)
+                addBooking(
+                    result.data,
+                    "🍽️ Catering",
+                    b => b.service
+                );
+
+
+            // TRANSPORT
+
+            result =
+                await supabaseClient
+                    .from("transport_bookings")
+                    .select("*")
+                    .eq("user_id", user.id);
+
+
+            if (result.data)
+                addBooking(
+                    result.data,
+                    "🚌 Transport",
+                    b => b.vehicle
+                );
+
+
+            // DJ
+
+            result =
+                await supabaseClient
+                    .from("dj_bookings")
+                    .select("*")
+                    .eq("user_id", user.id);
+
+
+            if (result.data)
+                addBooking(
+                    result.data,
+                    "🎧 DJ & Music",
+                    b => b.service
+                );
+
+
+            // DECORATION
+
+            result =
+                await supabaseClient
+                    .from("decoration_bookings")
+                    .select("*")
+                    .eq("user_id", user.id);
+
+
+            if (result.data)
+                addBooking(
+                    result.data,
+                    "🎨 Decoration",
+                    b => b.service
+                );
+
+
+            // MAKEUP
+
+            result =
+                await supabaseClient
+                    .from("makeup_bookings")
+                    .select("*")
+                    .eq("user_id", user.id);
+
+
+            if (result.data)
+                addBooking(
+                    result.data,
+                    "💄 Makeup & Beauty",
+                    b => b.service
+                );
+
+
+            // MEHENDI
+
+            result =
+                await supabaseClient
+                    .from("mehendi_bookings")
+                    .select("*")
+                    .eq("user_id", user.id);
+
+
+            if (result.data)
+                addBooking(
+                    result.data,
+                    "🌿 Mehendi",
+                    b => b.service
+                );
+
+
+            // PHOTOGRAPHY
+
+            result =
+                await supabaseClient
+                    .from("photography_bookings")
+                    .select("*")
+                    .eq("user_id", user.id);
+
+
+            if (result.data)
+                addBooking(
+                    result.data,
+                    "📸 Photography & Videography",
+                    b => b.service
+                );
+
+
+            // ROOMS
+
+            result =
+                await supabaseClient
+                    .from("room_bookings")
+                    .select("*")
+                    .eq("user_id", user.id);
+
+
+            if (result.data)
+                addBooking(
+                    result.data,
+                    "🏨 Guest Room",
+                    b => b.room_type
+                );
+
+
+            // EVENT MANAGER
+
+            result =
+                await supabaseClient
+                    .from("event_manager_requests")
+                    .select("*")
+                    .eq("user_id", user.id);
+
+
+            if (result.data)
+                addBooking(
+                    result.data,
+                    "👨‍💼 Event Manager",
+                    b => "Dedicated Event Manager"
+                );
+
+
+            // NO BOOKINGS
+
+            if (allBookings.length === 0) {
+
+                list.innerHTML = `
+
+                    <div class="empty">
+
+                        <h2>
+                            No Bookings Yet 📭
+                        </h2>
+
+                        <p>
+                            Your EventCenter bookings
+                            will appear here.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            // DISPLAY
+
+            list.innerHTML = "";
+
+
+            allBookings.forEach(booking => {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "booking-card";
+
+
+                const status =
+                    booking.status ||
+                    "Pending";
+
+
+                let roomDetails = "";
+
+
+                if (
+                    booking.service ===
+                    "🏨 Guest Room"
+                ) {
+
+                    roomDetails = `
+
+                        <div class="room-dates">
+
+                            <p>
+
+                                <strong>
+                                    📅 Check-in:
+                                </strong>
+
+                                ${booking.checkIn || "-"}
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    📅 Check-out:
+                                </strong>
+
+                                ${booking.checkOut || "-"}
+
+                            </p>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                card.innerHTML = `
+
+                    <h2>
+                        ${booking.service}
+                    </h2>
+
+                    <p>
+
+                        <strong>
+                            Service:
+                        </strong>
+
+                        ${booking.item || "-"}
+
+                    </p>
+
+                    <p>
+
+                        <strong>
+                            Name:
+                        </strong>
+
+                        ${booking.name || "-"}
+
+                    </p>
+
+                    <p>
+
+                        <strong>
+                            Email:
+                        </strong>
+
+                        ${booking.email || "-"}
+
+                    </p>
+
+                    <p>
+
+                        <strong>
+                            Phone:
+                        </strong>
+
+                        ${booking.phone || "-"}
+
+                    </p>
+
+                    <p>
+
+                        <strong>
+                            Event:
+                        </strong>
+
+                        ${booking.eventType || "-"}
+
+                    </p>
+
+                    ${booking.service !==
+                        "🏨 Guest Room"
+
+                        ?
+
+                        `
+
+                        <p>
+
+                            <strong>
+                                📅 Date:
+                            </strong>
+
+                            ${booking.date || "-"}
+
+                        </p>
+
+                        `
+
+                        :
+
+                        ""
+                    }
+
+                    <p>
+
+                        <strong>
+                            👥 Guests:
+                        </strong>
+
+                        ${booking.guests || "-"}
+
+                    </p>
+
+                    ${roomDetails}
+
+                    <span class="status ${getStatusClass(status)}">
+
+                        ${status}
+
+                    </span>
+
+                `;
+
+
+                list.appendChild(card);
+
+            });
+
+        }
+
+
+        // START
+
+        loadBookings();
+
+    </script>
+
+</body>
+
+</html>

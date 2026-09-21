@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventCenter | Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #101827, #3b1f5c);
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .logo span {
+            color: #c9a227;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #241333;
+        }
+
+        label {
+            display: block;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #7c3aed;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 10px;
+            background: #7c3aed;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #6d28d9;
+        }
+
+        .secondary-btn {
+            background: #c9a227;
+            color: #101827;
+        }
+
+        .secondary-btn:hover {
+            background: #b08d20;
+        }
+
+        .switch {
+            text-align: center;
+            margin-top: 18px;
+            color: #666;
+        }
+
+        .switch a {
+            color: #7c3aed;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 15px;
+            min-height: 22px;
+            font-size: 14px;
+        }
+
+        .otp-info {
+            text-align: center;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">
+            Event<span>Center</span>
+        </div>
+
+        <p class="subtitle">
+            Plan Your Event. We Handle Everything.
+        </p>
+
+        <!-- LOGIN -->
+        <div id="loginSection" class="form-section active">
+
+            <h2>Welcome Back 👋</h2>
+
+            <form id="loginForm">
+
+                <label>Email</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email" required>
+
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+            <p id="loginMessage" class="message"></p>
+
+            <div class="switch">
+                Don't have an account?
+                <a onclick="showSignup()">Create Account</a>
+            </div>
+
+        </div>
+
+
+        <!-- SIGNUP -->
+        <div id="signupSection" class="form-section">
+
+            <h2>Create Account 🎉</h2>
+
+            <form id="signupForm" onsubmit="handleSignup(event)">
+
+                <label>Full Name</label>
+                <input type="text" id="signupName" placeholder="Enter your full name" required>
+
+                <label>Email</label>
+                <input type="email" id="signupContact" placeholder="Enter your email" required>
+
+                <label>Password</label>
+                <input type="password" id="signupPassword" placeholder="Create password" required>
+
+                <label>Confirm Password</label>
+                <input type="password" id="signupConfirmPassword" placeholder="Confirm password" required>
+
+                <button type="submit">
+                    Send OTP
+                </button>
+
+            </form>
+
+            <p id="signupMessage" class="message"></p>
+
+            <div class="switch">
+                Already have an account?
+                <a onclick="showLogin()">Login</a>
+            </div>
+
+        </div>
+        <!-- OTP -->
+        <div id="otpSection" class="form-section">
+
+            <h2>Verify Your Email 📩</h2>
+
+            <p class="otp-info">
+                We sent a 6-digit OTP to your email address.
+                Enter it below to verify your account.
+            </p>
+
+            <label>OTP</label>
+
+            <input type="text" id="otpCode" placeholder="Enter 6-digit OTP" maxlength="6" inputmode="numeric">
+
+            <button onclick="verifySignupOTP()">
+                Verify OTP
+            </button>
+
+            <button type="button" class="secondary-btn" onclick="resendSignupOTP()">
+                Resend OTP
+            </button>
+
+            <p id="otpMessage" class="message"></p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- EventCenter JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

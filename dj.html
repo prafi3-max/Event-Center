@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventCenter | DJ & Music Services</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #fffaf5;
+            color: #29213d;
+        }
+
+        /* NAVBAR */
+
+        header {
+            width: 100%;
+            background: #ffffff;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 18px rgba(112, 72, 150, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #7b2cbf;
+        }
+
+        .logo span {
+            color: #f72585;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #443653;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #f72585;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #7b2cbf, #f72585);
+            color: white;
+            padding: 11px 22px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 570px;
+            padding: 80px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            background:
+                radial-gradient(circle at top left, #ffe0f0, transparent 35%),
+                radial-gradient(circle at bottom right, #e8ddff, transparent 35%),
+                #fffaf5;
+        }
+
+        .hero-content {
+            width: 50%;
+        }
+
+        .hero-label {
+            display: inline-block;
+            background: #fff0f7;
+            color: #d63384;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            line-height: 1.15;
+            margin-bottom: 22px;
+            color: #302044;
+        }
+
+        .hero h1 span {
+            color: #f72585;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #6d617b;
+            max-width: 560px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn {
+            border: none;
+            background: linear-gradient(135deg, #7b2cbf, #f72585);
+            color: white;
+            padding: 15px 28px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(247, 37, 133, 0.25);
+            transition: 0.3s;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .secondary-btn {
+            border: 2px solid #7b2cbf;
+            background: white;
+            color: #7b2cbf;
+            padding: 13px 27px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .secondary-btn:hover {
+            background: #7b2cbf;
+            color: white;
+        }
+
+        .hero-image {
+            width: 46%;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 390px;
+            object-fit: cover;
+            border-radius: 30px;
+            box-shadow: 0 18px 45px rgba(89, 45, 120, 0.2);
+            border: 8px solid white;
+        }
+
+        .floating-card {
+            position: absolute;
+            bottom: -22px;
+            left: -25px;
+            background: white;
+            padding: 18px 22px;
+            border-radius: 18px;
+            box-shadow: 0 12px 35px rgba(89, 45, 120, 0.16);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .floating-icon {
+            width: 48px;
+            height: 48px;
+            background: #fff0f7;
+            color: #f72585;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 23px;
+        }
+
+        .floating-card strong {
+            display: block;
+            color: #302044;
+            margin-bottom: 4px;
+        }
+
+        .floating-card small {
+            color: #84758f;
+        }
+
+        /* SECTION TITLE */
+
+        .section-title {
+            text-align: center;
+            padding: 75px 20px 35px;
+        }
+
+        .section-title span {
+            color: #f72585;
+            font-weight: bold;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin-top: 12px;
+            color: #302044;
+        }
+
+        .section-title p {
+            max-width: 650px;
+            margin: 15px auto 0;
+            color: #766b82;
+            line-height: 1.7;
+        }
+
+        /* SERVICE CARDS */
+
+        .services {
+            padding: 10px 7% 80px;
+            background: #ffffff;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .service-card {
+            background: #fffafc;
+            border: 1px solid #f2e4f2;
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 8px 25px rgba(112, 72, 150, 0.07);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #7b2cbf, #f72585, #ff9f1c);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(112, 72, 150, 0.15);
+        }
+
+        .service-icon {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #fbe4f1, #eee4ff);
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            color: #302044;
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: #776b83;
+            line-height: 1.7;
+            min-height: 76px;
+        }
+
+        .service-bottom {
+            margin-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price {
+            color: #7b2cbf;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .price small {
+            color: #8c8196;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        .book-btn {
+            border: none;
+            background: #fff0f7;
+            color: #d63384;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .book-btn:hover {
+            background: #f72585;
+            color: white;
+        }
+
+        /* WHY CHOOSE US */
+
+        .why-section {
+            padding: 75px 7%;
+            background:
+                linear-gradient(135deg, #fff3f8, #f5efff);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .why-card {
+            background: white;
+            padding: 28px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(112, 72, 150, 0.08);
+        }
+
+        .why-card div {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .why-card h3 {
+            color: #302044;
+            margin-bottom: 10px;
+        }
+
+        .why-card p {
+            color: #766b82;
+            line-height: 1.6;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1000px) {
+            .hero {
+                padding: 60px 5%;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .service-grid,
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            header {
+                padding: 18px 5%;
+            }
+        }
+
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                gap: 14px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 45px 5% 80px;
+            }
+
+            .hero-content,
+            .hero-image {
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image img {
+                height: 280px;
+            }
+
+            .floating-card {
+                left: 10px;
+                bottom: -25px;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+
+            .service-grid,
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services,
+            .why-section {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header>
+        <div class="logo">
+            Event<span>Center</span>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="venue.html">Venues</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="my-bookings.html">My Bookings</a>
+            <a href="auth.html" class="login-btn">Login</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <span class="hero-label">
+                🎧 Premium DJ & Music Services
+            </span>
+
+            <h1>
+                Make Every Moment
+                <span>Feel Amazing</span>
+            </h1>
+
+            <p>
+                Create unforgettable celebrations with professional DJs,
+                powerful sound systems, energetic lighting and music that
+                keeps every guest on the dance floor.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="primary-btn" onclick="scrollToServices()">
+                    Explore DJ Services
+                </button>
+
+                <button class="secondary-btn" onclick="selectDJ('Wedding DJ')">
+                    Book Wedding DJ
+                </button>
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img src="dj-hero.png" alt="Professional DJ music and lighting setup">
+
+            <div class="floating-card">
+                <div class="floating-icon">🎶</div>
+
+                <div>
+                    <strong>Feel the Beat</strong>
+                    <small>Music for every celebration</small>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SERVICES -->
+
+    <section class="services" id="services">
+
+        <div class="section-title">
+            <span>Our DJ Services</span>
+
+            <h2>Music That Matches Your Event</h2>
+
+            <p>
+                Choose the perfect DJ package for weddings, birthdays,
+                parties, receptions and special celebrations.
+            </p>
+        </div>
+
+        <div class="service-grid">
+
+            <div class="service-card">
+                <div class="service-icon">🎧</div>
+
+                <h3>Professional DJ</h3>
+
+                <p>
+                    A professional DJ with energetic music selection
+                    for your special event.
+                </p>
+
+                <div class="service-bottom">
+                    <div class="price">
+                        ₹10,000 <small>/ Event</small>
+                    </div>
+
+                    <button class="book-btn" onclick="selectDJ('Professional DJ')">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔊</div>
+
+                <h3>DJ + Sound System</h3>
+
+                <p>
+                    Complete DJ performance with powerful speakers,
+                    microphones and professional sound equipment.
+                </p>
+
+                <div class="service-bottom">
+                    <div class="price">
+                        ₹15,000 <small>/ Event</small>
+                    </div>
+
+                    <button class="book-btn" onclick="selectDJ('DJ + Sound System')">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💡</div>
+
+                <h3>DJ + Lights</h3>
+
+                <p>
+                    High-energy DJ music with colorful stage lights,
+                    party lights and dance-floor effects.
+                </p>
+
+                <div class="service-bottom">
+                    <div class="price">
+                        ₹18,000 <small>/ Event</small>
+                    </div>
+
+                    <button class="book-btn" onclick="selectDJ('DJ + Lights')">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💍</div>
+
+                <h3>Wedding DJ</h3>
+
+                <p>
+                    Special wedding music, entry songs, reception music
+                    and complete entertainment for your marriage event.
+                </p>
+
+                <div class="service-bottom">
+                    <div class="price">
+                        ₹20,000 <small>/ Event</small>
+                    </div>
+
+                    <button class="book-btn" onclick="selectDJ('Wedding DJ')">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎤</div>
+
+                <h3>DJ + Live Singer</h3>
+
+                <p>
+                    Enjoy DJ music combined with live singing for a
+                    premium and memorable celebration.
+                </p>
+
+                <div class="service-bottom">
+                    <div class="price">
+                        ₹25,000 <small>/ Event</small>
+                    </div>
+
+                    <button class="book-btn" onclick="selectDJ('DJ + Live Singer')">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎉</div>
+
+                <h3>Party DJ</h3>
+
+                <p>
+                    Fun party music for birthdays, college events,
+                    private parties and celebrations.
+                </p>
+
+                <div class="service-bottom">
+                    <div class="price">
+                        ₹8,000 <small>/ Event</small>
+                    </div>
+
+                    <button class="book-btn" onclick="selectDJ('Party DJ')">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- WHY CHOOSE US -->
+
+    <section class="why-section">
+
+        <div class="section-title">
+            <span>Why EventCenter?</span>
+
+            <h2>More Than Just Music</h2>
+
+            <p>
+                We help you create the right atmosphere from the first song
+                until the final moment of your celebration.
+            </p>
+        </div>
+
+        <div class="why-grid">
+
+            <div class="why-card">
+                <div>🎵</div>
+                <h3>Perfect Music</h3>
+                <p>
+                    Music selection based on your event type,
+                    guests and celebration style.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <div>🔊</div>
+                <h3>Quality Equipment</h3>
+                <p>
+                    Professional sound systems, microphones,
+                    DJ consoles and event equipment.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <div>✨</div>
+                <h3>Memorable Experience</h3>
+                <p>
+                    Energetic performances and beautiful lighting
+                    to make your event special.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+     DJ BOOKING MODAL
+========================= -->
+
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(48, 32, 68, 0.45);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 520px;
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 32px;
+            position: relative;
+            box-shadow: 0 25px 70px rgba(48, 32, 68, 0.25);
+            animation: popup 0.3s ease;
+        }
+
+        @keyframes popup {
+            from {
+                transform: scale(0.9) translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 18px;
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: #fff0f7;
+            color: #d63384;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-music-icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: linear-gradient(135deg, #fbe4f1, #eee4ff);
+        }
+
+        .modal-header h2 {
+            color: #302044;
+            margin-bottom: 7px;
+        }
+
+        .modal-header p {
+            color: #81758c;
+            font-size: 14px;
+        }
+
+        .selected-service {
+            background: linear-gradient(135deg, #fff0f7, #f3edff);
+            border-radius: 15px;
+            padding: 13px 16px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #7b2cbf;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            color: #40344d;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #eadfec;
+            border-radius: 12px;
+            outline: none;
+            background: #fffafd;
+            color: #302044;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #f72585;
+            box-shadow: 0 0 0 3px rgba(247, 37, 133, 0.08);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .confirm-booking {
+            width: 100%;
+            border: none;
+            margin-top: 5px;
+            padding: 15px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #7b2cbf, #f72585);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(247, 37, 133, 0.22);
+            transition: 0.3s;
+        }
+
+        .confirm-booking:hover {
+            transform: translateY(-2px);
+        }
+
+        .confirm-booking:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .booking-message {
+            display: none;
+            margin-top: 15px;
+            padding: 13px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .success-message {
+            background: #eafaf0;
+            color: #198754;
+        }
+
+        .error-message {
+            background: #fff0f0;
+            color: #dc3545;
+        }
+
+        @media (max-width: 550px) {
+            .modal-content {
+                padding: 25px 20px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+
+
+    <!-- BOOKING POPUP -->
+
+    <div class="modal" id="bookingModal">
+
+        <div class="modal-content">
+
+            <button class="close-modal" onclick="closeBookingModal()">
+                ×
+            </button>
+
+            <div class="modal-header">
+
+                <div class="modal-music-icon">
+                    🎧
+                </div>
+
+                <h2>Book Your DJ</h2>
+
+                <p>
+                    Tell us about your event and we'll handle the music.
+                </p>
+
+            </div>
+
+            <div class="selected-service" id="selectedService">
+                Selected DJ Service
+            </div>
+
+            <form id="djBookingForm">
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+                    <input type="text" id="fullName" placeholder="Enter your full name" required>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <input type="tel" id="phone" placeholder="10-digit number" maxlength="10" required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input type="email" id="email" placeholder="Enter your email" required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="eventType">
+                            Event Type
+                        </label>
+
+                        <select id="eventType" required>
+
+                            <option value="">
+                                Select event
+                            </option>
+
+                            <option value="Wedding">
+                                Wedding
+                            </option>
+
+                            <option value="Birthday">
+                                Birthday
+                            </option>
+
+                            <option value="Reception">
+                                Reception
+                            </option>
+
+                            <option value="Party">
+                                Party
+                            </option>
+
+                            <option value="College Event">
+                                College Event
+                            </option>
+
+                            <option value="Corporate Event">
+                                Corporate Event
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="guestCount">
+                            Guest Count
+                        </label>
+
+                        <input type="number" id="guestCount" min="1" placeholder="Example: 200" required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="eventDate">
+                        Event Date
+                    </label>
+
+                    <input type="date" id="eventDate" required>
+
+                </div>
+
+
+                <button type="submit" class="confirm-booking" id="confirmBookingBtn">
+                    Confirm DJ Booking 🎶
+                </button>
+
+                <div class="booking-message success-message" id="successMessage">
+                    DJ booking successful! 🎉
+                </div>
+
+                <div class="booking-message error-message" id="errorMessage">
+                    Something went wrong. Please try again.
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+     SUPABASE + BOOKING SCRIPT
+========================= -->
+
+    <script>
+
+        /* SUPABASE CONNECTION */
+
+        const SUPABASE_URL =
+            "https://mdcyegwahbgyesvetetd.supabase.co";
+
+        const SUPABASE_KEY =
+            "sb_publishable_em0Exl8pVQ6Fvzj4kcbb7A_wbDxNfKw";
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        /* VARIABLES */
+
+        let selectedDJService = "";
+
+
+        /* ELEMENTS */
+
+        const bookingModal =
+            document.getElementById("bookingModal");
+
+        const selectedService =
+            document.getElementById("selectedService");
+
+        const djBookingForm =
+            document.getElementById("djBookingForm");
+
+        const eventDateInput =
+            document.getElementById("eventDate");
+
+        const confirmBookingBtn =
+            document.getElementById("confirmBookingBtn");
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+
+        /* TODAY'S DATE */
+
+        const today =
+            new Date().toISOString().split("T")[0];
+
+        eventDateInput.min = today;
+
+
+        /* OPEN BOOKING POPUP */
+
+        function selectDJ(service) {
+
+            selectedDJService = service;
+
+            selectedService.textContent =
+                "🎧 " + service;
+
+            djBookingForm.reset();
+
+            successMessage.style.display = "none";
+            errorMessage.style.display = "none";
+
+            eventDateInput.min = today;
+
+            bookingModal.style.display = "flex";
+
+            document.body.style.overflow = "hidden";
+
+        }
+
+
+        /* CLOSE BOOKING POPUP */
+
+        function closeBookingModal() {
+
+            bookingModal.style.display = "none";
+
+            document.body.style.overflow = "auto";
+
+        }
+
+
+        /* SCROLL TO SERVICES */
+
+        function scrollToServices() {
+
+            document
+                .getElementById("services")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        /* CLOSE WHEN CLICKING OUTSIDE */
+
+        bookingModal.addEventListener(
+            "click",
+            function (event) {
+
+                if (event.target === bookingModal) {
+                    closeBookingModal();
+                }
+
+            }
+        );
+
+
+        /* ESCAPE KEY */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Escape") {
+                    closeBookingModal();
+                }
+
+            }
+        );
+
+
+        /* PHONE NUMBER */
+
+        document
+            .getElementById("phone")
+            .addEventListener(
+                "input",
+                function () {
+
+                    this.value =
+                        this.value.replace(/\D/g, "");
+
+                }
+            );
+
+
+        /* BOOKING SUBMIT */
+
+        djBookingForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                /* CHECK SERVICE */
+
+                if (!selectedDJService) {
+
+                    alert("Please select a DJ service.");
+
+                    return;
+
+                }
+
+
+                /* CHECK LOGIN */
+
+                const {
+                    data: {
+                        user
+                    },
+                    error: authError
+                } =
+                    await supabaseClient.auth.getUser();
+
+
+                if (authError || !user) {
+
+                    alert(
+                        "Please login first to book a DJ service."
+                    );
+
+                    window.location.href = "auth.html";
+
+                    return;
+
+                }
+
+
+                /* GET FORM DATA */
+
+                const name =
+                    document
+                        .getElementById("fullName")
+                        .value
+                        .trim();
+
+                const phone =
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim();
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+                const eventType =
+                    document
+                        .getElementById("eventType")
+                        .value;
+
+                const eventDate =
+                    document
+                        .getElementById("eventDate")
+                        .value;
+
+                const guestCount =
+                    document
+                        .getElementById("guestCount")
+                        .value;
+
+
+                /* VALIDATION */
+
+                if (
+                    !name ||
+                    !phone ||
+                    !email ||
+                    !eventType ||
+                    !eventDate ||
+                    !guestCount
+                ) {
+
+                    showError(
+                        "Please fill all required fields."
+                    );
+
+                    return;
+
+                }
+
+
+                if (phone.length !== 10) {
+
+                    showError(
+                        "Please enter a valid 10-digit phone number."
+                    );
+
+                    return;
+
+                }
+
+
+                if (Number(guestCount) < 1) {
+
+                    showError(
+                        "Guest count must be at least 1."
+                    );
+
+                    return;
+
+                }
+
+
+                if (eventDate < today) {
+
+                    showError(
+                        "Please select a future event date."
+                    );
+
+                    return;
+
+                }
+
+
+                /* DISABLE BUTTON */
+
+                confirmBookingBtn.disabled = true;
+
+                confirmBookingBtn.textContent =
+                    "Booking...";
+
+
+                successMessage.style.display = "none";
+                errorMessage.style.display = "none";
+
+
+                /* INSERT INTO SUPABASE */
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .from("dj_bookings")
+                        .insert([
+                            {
+                                user_id: user.id,
+                                service: selectedDJService,
+                                name: name,
+                                phone: phone,
+                                email: email,
+                                event_type: eventType,
+                                event_date: eventDate,
+                                guest_count: Number(guestCount)
+                            }
+                        ]);
+
+
+                /* ERROR */
+
+                if (error) {
+
+                    console.error(
+                        "DJ BOOKING ERROR:",
+                        error
+                    );
+
+                    showError(
+                        "Booking failed. Please try again."
+                    );
+
+                    confirmBookingBtn.disabled = false;
+
+                    confirmBookingBtn.textContent =
+                        "Confirm DJ Booking 🎶";
+
+                    return;
+
+                }
+
+
+                /* SUCCESS */
+
+                successMessage.textContent =
+                    "DJ booking successful! 🎉";
+
+                successMessage.style.display =
+                    "block";
+
+                confirmBookingBtn.textContent =
+                    "Booking Confirmed ✓";
+
+
+                setTimeout(
+                    function () {
+
+                        closeBookingModal();
+
+                        confirmBookingBtn.disabled = false;
+
+                        confirmBookingBtn.textContent =
+                            "Confirm DJ Booking 🎶";
+
+                    },
+                    1800
+                );
+
+            }
+        );
+
+
+        /* ERROR MESSAGE */
+
+        function showError(message) {
+
+            errorMessage.textContent = message;
+
+            errorMessage.style.display = "block";
+
+            successMessage.style.display = "none";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

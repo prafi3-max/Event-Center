@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>EventCenter | Venue Booking</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, #f5e8ff 0%, transparent 35%),
+        radial-gradient(circle at top right, #ffe7f3 0%, transparent 35%),
+        linear-gradient(135deg, #fffaff, #f5f0ff);
+      color: #24152f;
+      min-height: 100vh;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      background: rgba(255, 255, 255, 0.96);
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 25px rgba(91, 33, 182, 0.12);
+      border-bottom: 1px solid #eadcf4;
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      color: #4c1d5f;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #db2777;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #4b3a54;
+      margin-left: 22px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #c0267e;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      text-align: center;
+      padding: 75px 20px 45px;
+      background:
+        radial-gradient(circle at 50% 0%, #eadcff 0%, transparent 55%);
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      margin-bottom: 15px;
+      color: #321943;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      color: #725f7d;
+      font-size: 19px;
+    }
+
+    /* =========================
+       SEARCH BOX
+    ========================= */
+
+    .search-box {
+      width: 90%;
+      max-width: 1150px;
+      margin: 0 auto 45px;
+      background: rgba(255, 255, 255, 0.96);
+      padding: 28px;
+      border-radius: 22px;
+      box-shadow:
+        0 15px 40px rgba(76, 29, 95, 0.13),
+        0 2px 8px rgba(219, 39, 119, 0.06);
+
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+
+      border: 1px solid #eadcf4;
+    }
+
+    .search-box input,
+    .search-box select {
+      padding: 14px 15px;
+      border: 1px solid #dfd2e7;
+      border-radius: 12px;
+      font-size: 14px;
+      width: 100%;
+      background: #fffaff;
+      color: #34213d;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .search-box input:focus,
+    .search-box select:focus {
+      border-color: #a855f7;
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
+    }
+
+    .search-box button {
+      padding: 14px;
+      background: linear-gradient(135deg, #7c3aed, #db2777);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+      box-shadow: 0 8px 18px rgba(124, 58, 237, 0.25);
+      transition: 0.3s;
+    }
+
+    .search-box button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(219, 39, 119, 0.28);
+    }
+
+    /* =========================
+       VENUE GRID
+    ========================= */
+
+    .venues {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      padding-bottom: 70px;
+    }
+
+    /* =========================
+       VENUE CARD
+    ========================= */
+
+    .venue-card {
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow:
+        0 10px 30px rgba(76, 29, 95, 0.10),
+        0 2px 7px rgba(0, 0, 0, 0.03);
+      border: 1px solid #eadcf4;
+      position: relative;
+      overflow: hidden;
+      transition: 0.35s ease;
+    }
+
+    .venue-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg,
+          #7c3aed,
+          #db2777,
+          #ec4899);
+    }
+
+    .venue-card:hover {
+      transform: translateY(-8px);
+      box-shadow:
+        0 18px 45px rgba(76, 29, 95, 0.18),
+        0 5px 15px rgba(219, 39, 119, 0.08);
+    }
+
+    /* =========================
+       VENUE IMAGE
+    ========================= */
+
+    .venue-image {
+      height: 165px;
+      background:
+        radial-gradient(circle at 30% 20%, #f5d0fe, transparent 40%),
+        linear-gradient(135deg, #eee5ff, #ffe5f1);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 68px;
+      margin-bottom: 18px;
+      border: 1px solid #eadcf4;
+    }
+
+    .venue-card h2 {
+      font-size: 21px;
+      margin-bottom: 9px;
+      color: #43204f;
+      line-height: 1.3;
+    }
+
+    .location {
+      color: #765f7e;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .details {
+      margin: 12px 0;
+      line-height: 1.8;
+      color: #5e4b67;
+      font-size: 14px;
+    }
+
+    .price {
+      font-size: 21px;
+      font-weight: 800;
+      color: #8b2c83;
+      margin: 14px 0;
+    }
+
+    .rating {
+      display: inline-block;
+      color: #b45309;
+      font-weight: bold;
+      margin-bottom: 17px;
+      background: #fff7d6;
+      padding: 7px 12px;
+      border-radius: 20px;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .buttons button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 11px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .details-btn {
+      background: #f0eafa;
+      color: #5b2670;
+    }
+
+    .details-btn:hover {
+      background: #e3d5f3;
+      transform: translateY(-2px);
+    }
+
+    .book-btn {
+      background: linear-gradient(135deg, #7c3aed, #db2777);
+      color: white;
+      box-shadow: 0 7px 16px rgba(124, 58, 237, 0.20);
+    }
+
+    .book-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(219, 39, 119, 0.25);
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(32, 15, 42, 0.70);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 22px;
+      padding: 30px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+      border: 1px solid #eadcf4;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+      color: #7c2d78;
+    }
+
+    .close {
+      float: right;
+      font-size: 29px;
+      cursor: pointer;
+      color: #7c2d78;
+      transition: 0.2s;
+    }
+
+    .close:hover {
+      color: #db2777;
+      transform: scale(1.1);
+    }
+
+    .modal-content input,
+    .modal-content select {
+      width: 100%;
+      padding: 13px;
+      margin: 8px 0 15px;
+      border: 1px solid #dfd2e7;
+      border-radius: 10px;
+      outline: none;
+      background: #fffaff;
+    }
+
+    .modal-content input:focus,
+    .modal-content select:focus {
+      border-color: #a855f7;
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
+    }
+
+    .modal-content label {
+      font-weight: bold;
+      color: #43204f;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #7c3aed, #db2777);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 9px 20px rgba(124, 58, 237, 0.22);
+      transition: 0.3s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(219, 39, 119, 0.25);
+    }
+
+    /* =========================
+       NO RESULTS
+    ========================= */
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      background: white;
+      padding: 55px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(76, 29, 95, 0.10);
+      border: 1px solid #eadcf4;
+    }
+
+    .no-results h2 {
+      color: #7c2d78;
+      margin-bottom: 10px;
+    }
+
+    .no-results p {
+      color: #765f7e;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 900px) {
+
+      .venues {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .search-box {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 15px 20px;
+      }
+
+      .logo {
+        font-size: 23px;
+      }
+
+      nav a {
+        margin-left: 8px;
+        font-size: 14px;
+      }
+
+      .hero {
+        padding: 55px 20px 35px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .venues {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+
+      .venue-card {
+        padding: 18px;
+      }
+
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+
+    <div class="logo">
+      Event<span>Center</span>
+    </div>
+
+    <nav>
+
+      <a href="index.html">Home</a>
+
+      <a href="dashboard.html">Dashboard</a>
+
+    </nav>
+
+  </header>
+
+  <section class="hero">
+
+    <h1>
+      🏛️ Find Your Perfect Venue
+    </h1>
+
+    <p>
+      Search and book the perfect venue for your event.
+    </p>
+
+  </section>
+
+  <div class="search-box">
+
+    <input type="text" id="city" placeholder="City">
+
+    <input type="number" id="capacity" placeholder="Minimum Guests">
+
+    <input type="number" id="budget" placeholder="Maximum Budget">
+
+    <select id="type">
+
+      <option value="">
+        All Venue Types
+      </option>
+
+      <option value="Function Hall">
+        Function Hall
+      </option>
+
+      <option value="Convention Hall">
+        Convention Hall
+      </option>
+
+      <option value="Banquet Hall">
+        Banquet Hall
+      </option>
+
+      <option value="Party Hall">
+        Party Hall
+      </option>
+
+      <option value="Garden">
+        Garden
+      </option>
+
+      <option value="Resort">
+        Resort
+      </option>
+
+      <option value="Hotel">
+        Hotel
+      </option>
+
+    </select>
+
+    <select id="rating">
+
+      <option value="">
+        Any Rating
+      </option>
+
+      <option value="4">
+        4+ ⭐
+      </option>
+
+      <option value="4.5">
+        4.5+ ⭐
+      </option>
+
+      <option value="4.7">
+        4.7+ ⭐
+      </option>
+
+    </select>
+
+    <button onclick="searchVenues()">
+      🔍 Search
+    </button>
+
+  </div>
+
+  <section class="venues" id="venues">
+  </section>
+
+  <!-- DETAILS MODAL -->
+
+  <div class="modal" id="detailsModal">
+
+    <div class="modal-content">
+
+      <span class="close" onclick="closeModal('detailsModal')">
+        ×
+      </span>
+
+      <h2 id="detailsName"></h2>
+
+      <p id="detailsInfo"></p>
+
+    </div>
+
+  </div>
+
+  <!-- BOOKING MODAL -->
+
+  <div class="modal" id="bookingModal">
+
+    <div class="modal-content">
+
+      <span class="close" onclick="closeModal('bookingModal')">
+        ×
+      </span>
+
+      <h2>
+        📝 Book Venue
+      </h2>
+
+      <form id="bookingForm">
+
+        <label>
+          Full Name
+        </label>
+
+        <input type="text" id="fullName" required>
+
+        <label>
+          Phone Number
+        </label>
+
+        <input type="tel" id="phone" required>
+
+        <label>
+          Email
+        </label>
+
+        <input type="email" id="email" required>
+
+        <label>
+          Event Type
+        </label>
+
+        <select id="eventType" required>
+
+          <option value="">
+            Select Event
+          </option>
+
+          <option>Wedding</option>
+          <option>Birthday</option>
+          <option>Party</option>
+          <option>Engagement</option>
+          <option>Corporate Event</option>
+          <option>Other</option>
+
+        </select>
+
+        <label>
+          Event Date
+        </label>
+
+        <input type="date" id="eventDate" required>
+
+        <label>
+          Number of Guests
+        </label>
+
+        <input type="number" id="guestCount" min="1" required>
+
+        <button type="submit" class="submit-btn">
+
+          Confirm Booking 🎉
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+
+    const SUPABASE_URL =
+      "https://mdcyegwahbgyesvetetd.supabase.co";
+
+    const SUPABASE_ANON_KEY =
+      "sb_publishable_em0Exl8pVQ6Fvzj4kcbb7A_wbDxNfKw";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+
+    const venues = [
+
+      {
+        id: 1,
+        name: "Grand Palace Function Hall",
+        city: "Guntur",
+        area: "Brodipet",
+        type: "Function Hall",
+        capacity: 1000,
+        price: 45000,
+        rating: 4.8,
+        icon: "🏰"
+      },
+
+      {
+        id: 2,
+        name: "Royal Garden Convention Hall",
+        city: "Guntur",
+        area: "Lakshmipuram",
+        type: "Convention Hall",
+        capacity: 700,
+        price: 30000,
+        rating: 4.6,
+        icon: "🌿"
+      },
+
+      {
+        id: 3,
+        name: "Diamond Celebration Hall",
+        city: "Vijayawada",
+        area: "Benz Circle",
+        type: "Banquet Hall",
+        capacity: 500,
+        price: 25000,
+        rating: 4.5,
+        icon: "💎"
+      },
+
+      {
+        id: 4,
+        name: "Royal Mini Party Hall",
+        city: "Guntur",
+        area: "Arundelpet",
+        type: "Party Hall",
+        capacity: 300,
+        price: 12000,
+        rating: 4.2,
+        icon: "🎉"
+      },
+
+      {
+        id: 5,
+        name: "Grand Wedding Convention Center",
+        city: "Vijayawada",
+        area: "Poranki",
+        type: "Convention Hall",
+        capacity: 1500,
+        price: 60000,
+        rating: 4.9,
+        icon: "💒"
+      },
+
+      {
+        id: 6,
+        name: "Birthday Party Hall",
+        city: "Guntur",
+        area: "Nallapadu",
+        type: "Party Hall",
+        capacity: 150,
+        price: 7000,
+        rating: 4.1,
+        icon: "🎂"
+      },
+
+      {
+        id: 7,
+        name: "Green Leaf Celebration Garden",
+        city: "Guntur",
+        area: "Mangalagiri Road",
+        type: "Garden",
+        capacity: 800,
+        price: 35000,
+        rating: 4.7,
+        icon: "🌳"
+      },
+
+      {
+        id: 8,
+        name: "City Star Banquet Hall",
+        city: "Hyderabad",
+        area: "Kukatpally",
+        type: "Banquet Hall",
+        capacity: 600,
+        price: 40000,
+        rating: 4.6,
+        icon: "⭐"
+      },
+
+      {
+        id: 9,
+        name: "Lake View Party Resort",
+        city: "Hyderabad",
+        area: "Gandipet",
+        type: "Resort",
+        capacity: 700,
+        price: 55000,
+        rating: 4.8,
+        icon: "🏝️"
+      },
+
+      {
+        id: 10,
+        name: "Sunrise Function Hall",
+        city: "Vijayawada",
+        area: "Auto Nagar",
+        type: "Function Hall",
+        capacity: 400,
+        price: 18000,
+        rating: 4.3,
+        icon: "🌅"
+      },
+
+      {
+        id: 11,
+        name: "Royal Heritage Hotel",
+        city: "Visakhapatnam",
+        area: "MVP Colony",
+        type: "Hotel",
+        capacity: 900,
+        price: 75000,
+        rating: 4.9,
+        icon: "🏨"
+      },
+
+      {
+        id: 12,
+        name: "Happy Moments Party Hall",
+        city: "Nellore",
+        area: "Magunta Layout",
+        type: "Party Hall",
+        capacity: 250,
+        price: 10000,
+        rating: 4.0,
+        icon: "🥳"
+      },
+
+      {
+        id: 13,
+        name: "Golden Crown Convention Hall",
+        city: "Tirupati",
+        area: "Renigunta Road",
+        type: "Convention Hall",
+        capacity: 1200,
+        price: 50000,
+        rating: 4.7,
+        icon: "👑"
+      },
+
+      {
+        id: 14,
+        name: "Blue Pearl Banquet Hall",
+        city: "Visakhapatnam",
+        area: "Madhurawada",
+        type: "Banquet Hall",
+        capacity: 550,
+        price: 28000,
+        rating: 4.4,
+        icon: "🔵"
+      },
+
+      {
+        id: 15,
+        name: "Royal Farmhouse",
+        city: "Hyderabad",
+        area: "Shamshabad",
+        type: "Resort",
+        capacity: 500,
+        price: 45000,
+        rating: 4.5,
+        icon: "🏡"
+      },
+
+      {
+        id: 16,
+        name: "Silver Star Party Hall",
+        city: "Guntur",
+        area: "Chandramouli Nagar",
+        type: "Party Hall",
+        capacity: 200,
+        price: 9000,
+        rating: 4.0,
+        icon: "✨"
+      },
+
+      {
+        id: 17,
+        name: "Green Valley Resort",
+        city: "Vijayawada",
+        area: "Ibrahimpatnam",
+        type: "Resort",
+        capacity: 1000,
+        price: 65000,
+        rating: 4.8,
+        icon: "🌴"
+      },
+
+      {
+        id: 18,
+        name: "Elegant Events Hall",
+        city: "Nellore",
+        area: "Dargamitta",
+        type: "Function Hall",
+        capacity: 450,
+        price: 22000,
+        rating: 4.3,
+        icon: "✨"
+      },
+
+      {
+        id: 19,
+        name: "Royal Rose Garden",
+        city: "Tirupati",
+        area: "Tiruchanoor",
+        type: "Garden",
+        capacity: 600,
+        price: 32000,
+        rating: 4.6,
+        icon: "🌹"
+      },
+
+      {
+        id: 20,
+        name: "Metro Corporate Center",
+        city: "Hyderabad",
+        area: "Hitech City",
+        type: "Convention Hall",
+        capacity: 400,
+        price: 35000,
+        rating: 4.7,
+        icon: "🏢"
+      }
+
+    ];
+
+
+    let selectedVenue = null;
+
+
+    function displayVenues(list) {
+
+      const container =
+        document.getElementById("venues");
+
+      container.innerHTML = "";
+
+
+      if (list.length === 0) {
+
+        container.innerHTML = `
+
+          <div class="no-results">
+
+            <h2>
+              No venues found 😔
+            </h2>
+
+            <p>
+              Try changing your search filters.
+            </p>
+
+          </div>
+
+        `;
+
+        return;
+      }
+
+
+      list.forEach(venue => {
+
+        const card =
+          document.createElement("div");
+
+        card.className = "venue-card";
+
+
+        card.innerHTML = `
+
+          <div class="venue-image">
+            ${venue.icon}
+          </div>
+
+          <h2>
+            ${venue.name}
+          </h2>
+
+          <p class="location">
+            📍 ${venue.area}, ${venue.city}
+          </p>
+
+          <div class="details">
+
+            👥 Capacity:
+            ${venue.capacity}
+
+            <br>
+
+            🏛️ Type:
+            ${venue.type}
+
+          </div>
+
+          <div class="price">
+            ₹${venue.price.toLocaleString("en-IN")}
+          </div>
+
+          <div class="rating">
+            ⭐ ${venue.rating}
+          </div>
+
+          <div class="buttons">
+
+            <button
+              class="details-btn"
+              onclick="showDetails(${venue.id})">
+
+              Details
+
+            </button>
+
+            <button
+              class="book-btn"
+              onclick="openBooking(${venue.id})">
+
+              Book Now
+
+            </button>
+
+          </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+      });
+
+    }
+
+
+    function searchVenues() {
+
+      const city =
+        document.getElementById("city").value
+          .trim()
+          .toLowerCase();
+
+      const capacity =
+        Number(
+          document.getElementById("capacity").value
+        ) || 0;
+
+      const budget =
+        Number(
+          document.getElementById("budget").value
+        ) || Infinity;
+
+      const type =
+        document.getElementById("type").value;
+
+      const rating =
+        Number(
+          document.getElementById("rating").value
+        ) || 0;
+
+
+      const filtered =
+        venues.filter(venue => {
+
+          return (
+
+            (!city ||
+              venue.city
+                .toLowerCase()
+                .includes(city))
+
+            &&
+
+            venue.capacity >= capacity
+
+            &&
+
+            venue.price <= budget
+
+            &&
+
+            (!type ||
+              venue.type === type)
+
+            &&
+
+            venue.rating >= rating
+
+          );
+
+        });
+
+
+      displayVenues(filtered);
+
+    }
+
+
+    function showDetails(id) {
+
+      const venue =
+        venues.find(v => v.id === id);
+
+
+      document.getElementById(
+        "detailsName"
+      ).textContent = venue.name;
+
+
+      document.getElementById(
+        "detailsInfo"
+      ).innerHTML = `
+
+        📍 ${venue.area}, ${venue.city}
+
+        <br><br>
+
+        🏛️ Type: ${venue.type}
+
+        <br><br>
+
+        👥 Capacity: ${venue.capacity} guests
+
+        <br><br>
+
+        💰 Price:
+        ₹${venue.price.toLocaleString("en-IN")}
+
+        <br><br>
+
+        ⭐ Rating: ${venue.rating}
+
+      `;
+
+
+      document.getElementById(
+        "detailsModal"
+      ).style.display = "flex";
+
+    }
+
+
+    function openBooking(id) {
+
+      selectedVenue =
+        venues.find(v => v.id === id);
+
+
+      document.getElementById(
+        "bookingModal"
+      ).style.display = "flex";
+
+    }
+
+
+    function closeModal(id) {
+
+      document.getElementById(id)
+        .style.display = "none";
+
+    }
+
+
+    // =========================
+    // VENUE BOOKING
+    // =========================
+
+    document.getElementById(
+      "bookingForm"
+    ).addEventListener(
+      "submit",
+      async function (event) {
+
+        event.preventDefault();
+
+
+        // CHECK LOGIN
+
+        const {
+          data: { user }
+        } =
+          await supabaseClient.auth.getUser();
+
+
+        if (!user) {
+
+          alert(
+            "Please login first."
+          );
+
+          window.location.href =
+            "auth.html";
+
+          return;
+        }
+
+
+        // CREATE BOOKING
+
+        const booking = {
+
+          user_id: user.id,
+
+          venue_id:
+            selectedVenue.id,
+
+          venue_name:
+            selectedVenue.name,
+
+          name:
+            document.getElementById(
+              "fullName"
+            ).value,
+
+          phone:
+            document.getElementById(
+              "phone"
+            ).value,
+
+          email:
+            document.getElementById(
+              "email"
+            ).value,
+
+          event_type:
+            document.getElementById(
+              "eventType"
+            ).value,
+
+          event_data:
+            document.getElementById(
+              "eventDate"
+            ).value,
+
+          guest_count:
+            Number(
+              document.getElementById(
+                "guestCount"
+              ).value
+            )
+
+        };
+
+
+        // SAVE BOOKING
+
+        const { error } =
+          await supabaseClient
+            .from("venue_bookings")
+            .insert([booking]);
+
+
+        if (error) {
+
+          console.error(error);
+
+          alert(
+            "BOOKING FAILED ❌\n\n" +
+            error.message
+          );
+
+          return;
+        }
+
+
+        closeModal(
+          "bookingModal"
+        );
+
+
+        this.reset();
+
+
+        alert(
+          "Booking saved successfully! 🎉"
+        );
+
+
+        // EVENT MANAGER OFFER
+
+        setTimeout(() => {
+
+          if (
+            confirm(
+              "Would you like a dedicated Event Manager for your event?"
+            )
+          ) {
+
+            window.location.href =
+              "event-manager.html";
+
+          }
+
+        }, 500);
+
+      }
+    );
+
+
+    displayVenues(venues);
+
+  </script>
+
+</body>
+
+</html>

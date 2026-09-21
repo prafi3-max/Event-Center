@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventCenter | Guest Rooms</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            background:
+                radial-gradient(circle at top left,
+                    #fff6d8,
+                    transparent 30%),
+                radial-gradient(circle at top right,
+                    #dff7ee,
+                    transparent 35%),
+                linear-gradient(135deg,
+                    #f7faf8,
+                    #eef5f1);
+
+            color: #18352d;
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            background: rgba(6, 55, 45, 0.97);
+
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow:
+                0 6px 25px rgba(6, 55, 45, 0.20);
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            border-bottom:
+                1px solid rgba(230, 190, 75, 0.30);
+        }
+
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+
+
+        .logo span {
+            color: #f1cd6b;
+        }
+
+
+        nav a {
+            text-decoration: none;
+
+            color: #f8e7ad;
+
+            margin-left: 10px;
+
+            font-weight: bold;
+
+            padding: 9px 14px;
+
+            border-radius: 10px;
+
+            transition: 0.3s;
+        }
+
+
+        nav a:hover {
+            background:
+                rgba(241, 205, 107, 0.14);
+
+            color: white;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            text-align: center;
+
+            padding: 75px 20px 65px;
+
+            background:
+                linear-gradient(135deg,
+                    #06372d,
+                    #0b5b49,
+                    #174f45);
+
+            color: white;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(241, 205, 107, 0.10);
+
+            top: -140px;
+            left: -90px;
+        }
+
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 320px;
+            height: 320px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+
+            bottom: -190px;
+            right: -100px;
+        }
+
+
+        .hero h1 {
+            font-size: 44px;
+
+            margin-bottom: 14px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .hero h1::first-letter {
+            color: #f1cd6b;
+        }
+
+
+        .hero p {
+            font-size: 18px;
+
+            color: #d7e7e1;
+
+            position: relative;
+
+            z-index: 2;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           ROOM SERVICES
+        ========================= */
+
+        .services {
+            padding: 55px 7% 75px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit,
+                    minmax(260px, 1fr));
+
+            gap: 27px;
+        }
+
+
+        .service-card {
+            background:
+                linear-gradient(145deg,
+                    #ffffff,
+                    #fffdf6);
+
+            padding: 32px 25px;
+
+            border-radius: 22px;
+
+            text-align: center;
+
+            box-shadow:
+                0 12px 35px rgba(6, 55, 45, 0.11);
+
+            border:
+                1px solid #e4dec8;
+
+            border-top:
+                4px solid #d2a92f;
+
+            transition:
+                0.35s ease;
+        }
+
+
+        .service-card:hover {
+            transform:
+                translateY(-9px);
+
+            box-shadow:
+                0 20px 45px rgba(6, 55, 45, 0.17);
+
+            border-top-color:
+                #f1cd6b;
+        }
+
+
+        .service-icon {
+            width: 88px;
+            height: 88px;
+
+            margin:
+                0 auto 20px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 52px;
+
+            background:
+                linear-gradient(135deg,
+                    #fff4c9,
+                    #f4f0df);
+
+            border:
+                1px solid #ead8a0;
+
+            box-shadow:
+                0 8px 22px rgba(190, 150, 40, 0.14);
+        }
+
+
+        .service-card h3 {
+            font-size: 23px;
+
+            margin-bottom: 11px;
+
+            color: #18352d;
+        }
+
+
+        .service-card p {
+            color: #66756f;
+
+            line-height: 1.6;
+
+            margin-bottom: 18px;
+
+            font-size: 14px;
+
+            min-height: 48px;
+        }
+
+
+        .price {
+            display: inline-block;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+            color: #8a6814;
+
+            background:
+                #fff5d2;
+
+            border:
+                1px solid #ead8a0;
+
+            padding:
+                8px 15px;
+
+            border-radius: 22px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .service-card button {
+            border: none;
+
+            background:
+                linear-gradient(135deg,
+                    #06372d,
+                    #0d5c4b);
+
+            color: #f8df91;
+
+            padding:
+                12px 24px;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 7px 18px rgba(6, 55, 45, 0.22);
+
+            border:
+                1px solid rgba(241, 205, 107, 0.25);
+        }
+
+
+        .service-card button:hover {
+            transform:
+                translateY(-2px);
+
+            background:
+                linear-gradient(135deg,
+                    #042a23,
+                    #08483c);
+
+            color: white;
+
+            box-shadow:
+                0 10px 24px rgba(6, 55, 45, 0.28);
+        }
+
+
+        /* =========================
+           BOOKING POPUP
+        ========================= */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+
+            z-index: 9999;
+
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background:
+                rgba(3, 30, 25, 0.78);
+
+            backdrop-filter:
+                blur(7px);
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+        }
+
+
+        .modal-content {
+            background:
+                linear-gradient(145deg,
+                    #ffffff,
+                    #fffdf7);
+
+            width: 100%;
+
+            max-width: 500px;
+
+            padding: 32px;
+
+            border-radius: 23px;
+
+            box-shadow:
+                0 25px 65px rgba(0, 0, 0, 0.30);
+
+            position: relative;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            border:
+                1px solid #e3d9b9;
+
+            border-top:
+                5px solid #d2a92f;
+        }
+
+
+        .close-btn {
+            position: absolute;
+
+            right: 20px;
+            top: 15px;
+
+            width: 35px;
+            height: 35px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: #557068;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .close-btn:hover {
+            background:
+                #fee2e2;
+
+            color:
+                #dc2626;
+        }
+
+
+        .modal-content h2 {
+            text-align: center;
+
+            margin-bottom: 10px;
+
+            color: #0b5b49;
+
+            font-size: 25px;
+        }
+
+
+        .selected-room {
+            text-align: center;
+
+            margin-bottom: 24px;
+
+            color: #65736e;
+
+            font-weight: bold;
+
+            background:
+                #fff7dc;
+
+            border:
+                1px solid #ead8a0;
+
+            padding: 11px;
+
+            border-radius: 11px;
+        }
+
+
+        .selected-room span {
+            color: #92701c;
+        }
+
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+
+            color: #304b43;
+        }
+
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+
+            padding: 13px;
+
+            border:
+                1px solid #d2dbd7;
+
+            background:
+                #fbfcfa;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            color: #18352d;
+
+            transition: 0.3s;
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color:
+                #c49a24;
+
+            box-shadow:
+                0 0 0 3px rgba(196, 154, 36, 0.13);
+
+            background: white;
+        }
+
+
+        .book-btn {
+            width: 100%;
+
+            border: none;
+
+            background:
+                linear-gradient(135deg,
+                    #06372d,
+                    #0d5c4b);
+
+            color: #f8df91;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 8px 22px rgba(6, 55, 45, 0.23);
+        }
+
+
+        .book-btn:hover {
+            transform:
+                translateY(-2px);
+
+            color: white;
+
+            background:
+                linear-gradient(135deg,
+                    #042a23,
+                    #08483c);
+        }
+
+
+        #formMessage {
+            text-align: center;
+
+            margin-top: 16px;
+
+            font-weight: bold;
+
+            padding: 4px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding:
+                    15px 5%;
+            }
+
+
+            .logo {
+                font-size: 23px;
+            }
+
+
+            nav a {
+                margin-left: 5px;
+
+                font-size: 12px;
+
+                padding:
+                    7px 8px;
+            }
+
+
+            .hero {
+                padding:
+                    55px 18px;
+            }
+
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+
+            .hero p {
+                font-size: 15px;
+            }
+
+
+            .services {
+                padding:
+                    40px 5% 60px;
+            }
+
+
+            .modal-content {
+                padding:
+                    27px 20px;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="logo">
+            Event<span>Center</span>
+        </div>
+
+
+        <div>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+
+            <a href="my-bookings.html">
+                My Bookings
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <h1>
+            🏨 Guest Rooms
+        </h1>
+
+
+        <p>
+            Comfortable accommodation for your event guests.
+        </p>
+
+    </section>
+
+
+    <!-- ROOMS -->
+
+    <section class="services">
+
+
+        <!-- STANDARD ROOM -->
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                🛏️
+            </div>
+
+
+            <h3>
+                Standard Room
+            </h3>
+
+
+            <p>
+                Comfortable room for guests with
+                essential facilities.
+            </p>
+
+
+            <div class="price">
+                ₹2,000 / Night
+            </div>
+
+
+            <button onclick="selectRoom('Standard Room')">
+
+                Book Now
+
+            </button>
+
+        </div>
+
+
+        <!-- DELUXE ROOM -->
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                🏨
+            </div>
+
+
+            <h3>
+                Deluxe Room
+            </h3>
+
+
+            <p>
+                Spacious room with premium
+                facilities and comfortable stay.
+            </p>
+
+
+            <div class="price">
+                ₹3,500 / Night
+            </div>
+
+
+            <button onclick="selectRoom('Deluxe Room')">
+
+                Book Now
+
+            </button>
+
+        </div>
+
+
+        <!-- FAMILY ROOM -->
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                👨‍👩‍👧‍👦
+            </div>
+
+
+            <h3>
+                Family Room
+            </h3>
+
+
+            <p>
+                Large room suitable for families
+                and groups.
+            </p>
+
+
+            <div class="price">
+                ₹4,500 / Night
+            </div>
+
+
+            <button onclick="selectRoom('Family Room')">
+
+                Book Now
+
+            </button>
+
+        </div>
+
+
+        <!-- PREMIUM SUITE -->
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                👑
+            </div>
+
+
+            <h3>
+                Premium Suite
+            </h3>
+
+
+            <p>
+                Luxury suite for VIP guests and
+                special family members.
+            </p>
+
+
+            <div class="price">
+                ₹6,000 / Night
+            </div>
+
+
+            <button onclick="selectRoom('Premium Suite')">
+
+                Book Now
+
+            </button>
+
+        </div>
+
+
+        <!-- COUPLE ROOM -->
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                💑
+            </div>
+
+
+            <h3>
+                Couple Room
+            </h3>
+
+
+            <p>
+                Comfortable private room for
+                couples and newlyweds.
+            </p>
+
+
+            <div class="price">
+                ₹3,000 / Night
+            </div>
+
+
+            <button onclick="selectRoom('Couple Room')">
+
+                Book Now
+
+            </button>
+
+        </div>
+
+
+        <!-- GUEST HOUSE -->
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                🏠
+            </div>
+
+
+            <h3>
+                Guest House
+            </h3>
+
+
+            <p>
+                Complete guest accommodation for
+                larger groups.
+            </p>
+
+
+            <div class="price">
+                ₹10,000 / Night
+            </div>
+
+
+            <button onclick="selectRoom('Guest House')">
+
+                Book Now
+
+            </button>
+
+        </div>
+
+    </section>
+    <!-- BOOKING POPUP -->
+
+    <div id="bookingModal" class="modal">
+
+        <div class="modal-content">
+
+
+            <span class="close-btn" onclick="closeBookingModal()">
+
+                &times;
+
+            </span>
+
+
+            <h2>
+                🏨 Book Guest Room
+            </h2>
+
+
+            <div class="selected-room">
+
+                Selected Room:
+
+                <span id="selectedRoom"></span>
+
+            </div>
+
+
+            <form id="roomForm">
+
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+
+                    <input type="text" id="fullName" placeholder="Enter your full name" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+
+                    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+
+                    <input type="email" id="email" placeholder="Enter your email" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="eventType">
+                        Event Type
+                    </label>
+
+
+                    <select id="eventType" required>
+
+                        <option value="">
+                            Select Event Type
+                        </option>
+
+                        <option value="Wedding">
+                            Wedding
+                        </option>
+
+                        <option value="Birthday">
+                            Birthday
+                        </option>
+
+                        <option value="Party">
+                            Party
+                        </option>
+
+                        <option value="Engagement">
+                            Engagement
+                        </option>
+
+                        <option value="Corporate Event">
+                            Corporate Event
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="checkIn">
+                        Check-in Date
+                    </label>
+
+
+                    <input type="date" id="checkIn" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="checkOut">
+                        Check-out Date
+                    </label>
+
+
+                    <input type="date" id="checkOut" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="guestCount">
+                        Number of Guests
+                    </label>
+
+
+                    <input type="number" id="guestCount" min="1" placeholder="Enter number of guests" required>
+
+                </div>
+
+
+                <button type="submit" class="book-btn">
+
+                    Book Room 🏨
+
+                </button>
+
+
+                <div id="formMessage"></div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://mdcyegwahbgyesvetetd.supabase.co";
+
+
+        const SUPABASE_PUBLISHABLE_KEY =
+            "sb_publishable_em0Exl8pVQ6Fvzj4kcbb7A_wbDxNfKw";
+
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
+            );
+
+
+        let selectedRoomType = "";
+
+
+        // =========================
+        // OPEN BOOKING POPUP
+        // =========================
+
+        function selectRoom(room) {
+
+            selectedRoomType = room;
+
+
+            document
+                .getElementById("selectedRoom")
+                .textContent = room;
+
+
+            document
+                .getElementById("bookingModal")
+                .style.display = "flex";
+
+        }
+
+
+        // =========================
+        // CLOSE BOOKING POPUP
+        // =========================
+
+        function closeBookingModal() {
+
+            document
+                .getElementById("bookingModal")
+                .style.display = "none";
+
+
+            document
+                .getElementById("formMessage")
+                .textContent = "";
+
+        }
+
+
+        // =========================
+        // CLOSE OUTSIDE POPUP
+        // =========================
+
+        window.addEventListener(
+            "click",
+            function (event) {
+
+                const modal =
+                    document.getElementById(
+                        "bookingModal"
+                    );
+
+
+                if (event.target === modal) {
+
+                    closeBookingModal();
+
+                }
+
+            }
+        );
+
+
+        // =========================
+        // ROOM BOOKING
+        // =========================
+
+        document
+            .getElementById("roomForm")
+            .addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
+
+
+                    const formMessage =
+                        document.getElementById(
+                            "formMessage"
+                        );
+
+
+                    // CHECK LOGIN
+
+                    const {
+                        data: { user }
+                    } =
+                        await supabaseClient
+                            .auth
+                            .getUser();
+
+
+                    if (!user) {
+
+                        formMessage.style.color =
+                            "#dc2626";
+
+
+                        formMessage.textContent =
+                            "Please login first.";
+
+
+                        setTimeout(
+                            function () {
+
+                                window.location.href =
+                                    "auth.html";
+
+                            },
+                            1000
+                        );
+
+
+                        return;
+
+                    }
+
+
+                    // GET FORM VALUES
+
+                    const name =
+                        document
+                            .getElementById(
+                                "fullName"
+                            )
+                            .value
+                            .trim();
+
+
+                    const phone =
+                        document
+                            .getElementById(
+                                "phone"
+                            )
+                            .value
+                            .trim();
+
+
+                    const email =
+                        document
+                            .getElementById(
+                                "email"
+                            )
+                            .value
+                            .trim();
+
+
+                    const eventType =
+                        document
+                            .getElementById(
+                                "eventType"
+                            )
+                            .value;
+
+
+                    const checkIn =
+                        document
+                            .getElementById(
+                                "checkIn"
+                            )
+                            .value;
+
+
+                    const checkOut =
+                        document
+                            .getElementById(
+                                "checkOut"
+                            )
+                            .value;
+
+
+                    const guestCount =
+                        document
+                            .getElementById(
+                                "guestCount"
+                            )
+                            .value;
+
+
+                    // CHECK DATES
+
+                    if (checkOut < checkIn) {
+
+                        formMessage.style.color =
+                            "#dc2626";
+
+
+                        formMessage.textContent =
+                            "Check-out date must be after check-in date.";
+
+
+                        return;
+
+                    }
+
+
+                    // BOOKING STATUS
+
+                    formMessage.style.color =
+                        "#9a7519";
+
+
+                    formMessage.textContent =
+                        "Booking your room... ⏳";
+
+
+                    // SAVE TO SUPABASE
+
+                    const { error } =
+                        await supabaseClient
+                            .from("room_bookings")
+                            .insert([{
+
+                                user_id:
+                                    user.id,
+
+                                room_type:
+                                    selectedRoomType,
+
+                                name:
+                                    name,
+
+                                phone:
+                                    phone,
+
+                                email:
+                                    email,
+
+                                event_type:
+                                    eventType,
+
+                                check_in:
+                                    checkIn,
+
+                                check_out:
+                                    checkOut,
+
+                                guest_count:
+                                    Number(
+                                        guestCount
+                                    )
+
+                            }]);
+
+
+                    // ERROR
+
+                    if (error) {
+
+                        console.error(
+                            "ROOM BOOKING ERROR:",
+                            error
+                        );
+
+
+                        formMessage.style.color =
+                            "#dc2626";
+
+
+                        formMessage.textContent =
+                            "Room booking failed ❌ " +
+                            error.message;
+
+
+                        return;
+
+                    }
+
+
+                    // SUCCESS
+
+                    formMessage.style.color =
+                        "#15803d";
+
+
+                    formMessage.textContent =
+                        "Room Booking Successful! 🎉";
+
+
+                    // CLEAR FORM
+
+                    document
+                        .getElementById(
+                            "roomForm"
+                        )
+                        .reset();
+
+
+                    // CLOSE POPUP
+
+                    setTimeout(
+                        function () {
+
+                            closeBookingModal();
+
+                        },
+                        1500
+                    );
+
+                }
+            );
+
+    </script>
+
+</body>
+
+</html>
