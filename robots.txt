@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prafi3-max.github.io/Event-Center/sitemap.xml
